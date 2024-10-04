@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">StudyMateTwo</string>
+    MainActivity
+    -----------------------------------------------------------------------
+    <string name="logo1">다양한 멘티,멘토와의 협력을 통해</string>
+    <string name="logo2">함께 공부하고 성장하세요.</string>
+    <string name="logo3">공부는 스터디메이트 !</string>
+    <string name="login">로그인</string>
+    <string name="sign_up">회원가입</string>
+
+    signupActivity
+    ----------------------------------------------------------------------------------------------------
+    <string name="email">이메일</string>
+    <string name="password">비밀번호</string>
+</resources>
