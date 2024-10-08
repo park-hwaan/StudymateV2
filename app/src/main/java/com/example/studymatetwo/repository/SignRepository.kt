@@ -1,19 +1,26 @@
 package com.example.studymatetwo.repository
 
+import android.content.Context
 import com.example.studymatetwo.api.ApiResponse
 import com.example.studymatetwo.api.ApiService
 import com.example.studymatetwo.api.RetrofitWork
 import com.example.studymatetwo.dto.SignInDto
 import com.example.studymatetwo.dto.SignInResponseDto
+import dagger.hilt.android.qualifiers.ApplicationContext
 import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
+import javax.inject.Inject
 
-class SignRepository {
-    private val retrofitInstance = RetrofitWork.getInstance().create(ApiService::class.java)
+class SignRepository @Inject constructor(private val apiService: ApiService, @ApplicationContext private val context: Context) {
+    private val sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
     suspend fun postSignIn(signInDto: SignInDto): ApiResponse<SignInResponseDto> {
         return try {
-            val response = retrofitInstance.postSignIn(signInDto)
+            val response = apiService.postSignIn(signInDto)
+            val editor = sharedPreferences.edit()
+            editor.putString("userToken", response.accessToken)
+            editor.putString("refreshToken", response.refreshToken)
+            editor.apply()
             ApiResponse.Success(response)
         } catch (e: HttpException) {
             ApiResponse.Error(e.message ?: "HTTP 오류 발생")

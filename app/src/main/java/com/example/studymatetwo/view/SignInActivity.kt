@@ -2,14 +2,20 @@ package com.example.studymatetwo.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
+import com.example.studymatetwo.R
 import com.example.studymatetwo.api.ApiResponse
 import com.example.studymatetwo.databinding.ActivitySignInBinding
 import com.example.studymatetwo.dto.SignInDto
 import com.example.studymatetwo.viewmodel.SignViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignInActivity : AppCompatActivity() {
     lateinit var binding :ActivitySignInBinding
     private val signViewModel: SignViewModel by viewModels()
@@ -27,11 +33,6 @@ class SignInActivity : AppCompatActivity() {
 
         //observe
         signInObserve()
-
-
-
-
-
     }
     //로그인 옵저브 함수
     private fun signInObserve(){
@@ -53,4 +54,5 @@ class SignInActivity : AppCompatActivity() {
             }
         })
     }
+
 }

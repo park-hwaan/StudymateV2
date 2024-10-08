@@ -1,5 +1,6 @@
 package com.example.studymatetwo.viewmodel
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,14 +10,15 @@ import com.example.studymatetwo.api.ApiResponse
 import com.example.studymatetwo.dto.SignInDto
 import com.example.studymatetwo.dto.SignInResponseDto
 import com.example.studymatetwo.repository.SignRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SignViewModel : ViewModel() {
+@HiltViewModel
+class SignViewModel @Inject constructor(private val repository: SignRepository) : ViewModel()  {
     private val _signInResult = MutableLiveData<ApiResponse<SignInResponseDto>>()
     val signInResult: LiveData<ApiResponse<SignInResponseDto>> = _signInResult
-
-    private val repository = SignRepository()
 
     // Sign-In using Retrofit
     fun postSignIn(signInModel: SignInDto) {
@@ -24,10 +26,8 @@ class SignViewModel : ViewModel() {
             _signInResult.value = ApiResponse.Error("입력값을 확인해주세요")
             return
         }
-
         viewModelScope.launch(Dispatchers.IO) {
             _signInResult.postValue(ApiResponse.Loading())
-
             val response = repository.postSignIn(signInModel)
             _signInResult.postValue(response)
         }

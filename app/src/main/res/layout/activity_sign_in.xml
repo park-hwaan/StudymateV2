@@ -60,6 +60,6 @@
         android:text="@string/login"
         android:textColor="@color/white"
         android:textStyle="bold"
-        android:background="@drawable/sign_up_button"/>
+        android:background="@drawable/sign_up_button_light_blue"/>
 
 </LinearLayout>
