@@ -23,7 +23,7 @@ class SignViewModel @Inject constructor(private val repository: SignRepository) 
     // Sign-In using Retrofit
     fun postSignIn(signInModel: SignInDto) {
         if (!validateSignInModel(signInModel)) {
-            _signInResult.value = ApiResponse.Error("입력값을 확인해주세요")
+            _signInResult.value = ApiResponse.Error("입력 값을 확인해주세요")
             return
         }
         viewModelScope.launch(Dispatchers.IO) {

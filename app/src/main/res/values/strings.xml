@@ -12,4 +12,36 @@
     ----------------------------------------------------------------------------------------------------
     <string name="email">이메일</string>
     <string name="password">비밀번호</string>
+    <string name="next">다음</string>
+
+    emailFragment
+    ----------------------------------------------------------------------------------------------------
+    <string name="insert_email">이메일을 입력해주세요</string>
+    <string name="hint_email">1234@naver.com</string>
+    <string name="insert_info">본인의 정보를 입력해주세요!</string>
+    <string name="blog">블로그 주소</string>
+    <string name="job">직업</string>
+    <string name="major">전문분야</string>
+    <string name="award">수상경력</string>
+    <string name="blog_hint">www.naver.com</string>
+    <string name="job_hint">개발자</string>
+    <string name="major_hint">JPA Python Jwt</string>
+    <string name="award_hint">알고리즘대회 1등</string>
+    <string name="choose_major">전공을 선택해주세요!</string>
+    <string name="web_app">WEBAPP</string>
+    <string name="server">SERVER</string>
+    <string name="ai">AI</string>
+    <string name="data">DATA</string>
+    <string name="security">SECURITY</string>
+    <string name="insert_phone_name">이름과 번호를 입력해주세요.</string>
+    <string name="name">이름</string>
+    <string name="phone">전화번호</string>
+    <string name="phone_hint">01046666208</string>
+    <string name="insert_nickname">닉네임을 입력해주세요!</string>
+    <string name="mentor_mentee_selection">처음 오셧군요, 반가워요!\n멘토이신가요 멘티이신가요?</string>
+    <string name="mentor">MENTOR</string>
+    <string name="mentee">MENTEE</string>
+    <string name="insert_password">비밀번호를 입력해주세요</string>
+    <string name="password_hint">*******</string>
+
 </resources>

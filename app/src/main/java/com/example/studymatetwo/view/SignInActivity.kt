@@ -45,7 +45,7 @@ class SignInActivity : AppCompatActivity() {
                 }
                 is ApiResponse.Error -> {
                     // 로그인 실패 처리
-                    Toast.makeText(this, "로그인 실패: ${response.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "로그인 실패: 비밀번호와 아이디를 확인해주세요", Toast.LENGTH_SHORT).show()
                 }
                 is ApiResponse.Loading -> {
                     // 로딩 처리
