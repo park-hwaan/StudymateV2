@@ -1,57 +1,77 @@
 package com.example.studymatetwo.view.signUpFragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import com.example.studymatetwo.R
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import com.example.studymatetwo.databinding.FragmentMajorPartBinding
+import com.example.studymatetwo.view.SignUpActivity
+import org.json.JSONObject
 
-/**
- * A simple [Fragment] subclass.
- * Use the [MajorPartFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class MajorPartFragment : Fragment() {
-    // TODO:    private var param1: String? = null
-    //    private var param2: String? = null Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var binding : FragmentMajorPartBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    private lateinit var majorList: List<Button>
+    private val koreanToEnglishMap = mapOf(
+        "웹/앱" to "WEBAPP",
+        "서버/네트워크" to "SERVER",
+        "AI/IOT" to "AI",
+        "데이터개발" to "DATA",
+        "보안" to "SECURITY",
+    )
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("parkHwan", "성별 프라그먼트 onStop() 호출")
+
+        // 선택된 버튼에 따라 JSON 형식의 문자열 생성
+        val selectedButtonText = when {
+            binding.majorBtn1.isSelected -> translateToEnglish(binding.majorBtn1.text.toString())
+            binding.majorBtn2.isSelected -> translateToEnglish(binding.majorBtn2.text.toString())
+            binding.majorBtn3.isSelected -> translateToEnglish(binding.majorBtn3.text.toString())
+            binding.majorBtn4.isSelected -> translateToEnglish(binding.majorBtn4.text.toString())
+            binding.majorBtn5.isSelected -> translateToEnglish(binding.majorBtn5.text.toString())
+            else -> ""
         }
-    }
 
+        // JSON 객체를 생성하고 키 "interests"에 해당 버튼의 텍스트를 넣어줍니다.
+        val json = JSONObject().apply {
+            put("interests", selectedButtonText)
+        }
+
+        // ProfileSetting 액티비티의 receiveData 함수 호출
+        val mainActivity = activity as SignUpActivity
+        mainActivity.receiveData(this, json.toString())
+    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_major_part, container, false)
+        binding = FragmentMajorPartBinding.inflate(inflater, container, false)
+
+        majorList = listOf(
+            binding.majorBtn1,
+            binding.majorBtn2,
+            binding.majorBtn3,
+            binding.majorBtn4,
+            binding.majorBtn5
+        )
+
+        majorList.forEach { Button ->
+            val remainList = majorList.filter { it != Button }
+
+            Button.setOnClickListener {
+                it.isSelected = !(it.isSelected)
+                remainList.forEach { it.isSelected = false }
+            }
+        }
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MajorPartFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic fun newInstance(param1: String, param2: String) =
-                MajorPartFragment().apply {
-                    arguments = Bundle().apply {
-                        putString(ARG_PARAM1, param1)
-                        putString(ARG_PARAM2, param2)
-                    }
-                }
+    private fun translateToEnglish(koreanText: String): String {
+        return koreanToEnglishMap[koreanText] ?: koreanText
     }
 }
