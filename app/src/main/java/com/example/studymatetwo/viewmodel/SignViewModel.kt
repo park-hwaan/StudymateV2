@@ -7,7 +7,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.studymatetwo.api.ApiResponse
-import com.example.studymatetwo.api.ApiSuccessResponse
 import com.example.studymatetwo.dto.SignInDto
 import com.example.studymatetwo.dto.SignInResponseDto
 import com.example.studymatetwo.dto.SignUpDto

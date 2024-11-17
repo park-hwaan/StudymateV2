@@ -1,17 +1,13 @@
 package com.example.studymatetwo.repository
 
 import android.content.Context
-import android.util.Log
 import com.example.studymatetwo.api.ApiResponse
 import com.example.studymatetwo.api.ApiService
-import com.example.studymatetwo.api.ApiSuccessResponse
-import com.example.studymatetwo.api.RetrofitWork
 import com.example.studymatetwo.dto.SignInDto
 import com.example.studymatetwo.dto.SignInResponseDto
 import com.example.studymatetwo.dto.SignUpDto
 import dagger.hilt.android.qualifiers.ApplicationContext
 import retrofit2.HttpException
-import retrofit2.Response
 import java.io.IOException
 import javax.inject.Inject
 

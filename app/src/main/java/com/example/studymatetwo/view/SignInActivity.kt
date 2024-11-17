@@ -41,7 +41,8 @@ class SignInActivity : AppCompatActivity() {
             when (response) {
                 is ApiResponse.Success -> {
                     Toast.makeText(this, "로그인 성공!", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, MainActivity::class.java))
+                    val intent = Intent(this, HomeActivity::class.java)
+                    startActivity(intent)
                 }
                 is ApiResponse.Error -> {
                     Toast.makeText(this, "로그인 실패: 비밀번호와 아이디를 확인해주세요", Toast.LENGTH_SHORT).show()
