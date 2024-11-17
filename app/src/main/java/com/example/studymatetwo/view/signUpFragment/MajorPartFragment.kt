@@ -17,11 +17,11 @@ class MajorPartFragment : Fragment() {
 
     private lateinit var majorList: List<Button>
     private val koreanToEnglishMap = mapOf(
-        "웹/앱" to "WEBAPP",
-        "서버/네트워크" to "SERVER",
-        "AI/IOT" to "AI",
-        "데이터개발" to "DATA",
-        "보안" to "SECURITY",
+        "웹/앱" to "MATH",
+        "서버/네트워크" to "MATH",
+        "AI/IOT" to "MATH",
+        "데이터개발" to "MATH",
+        "보안" to "MATH",
     )
 
     override fun onStop() {

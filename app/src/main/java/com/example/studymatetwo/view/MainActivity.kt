@@ -17,13 +17,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //로그인 화면으로 이동
-        binding.LoginText.setOnClickListener {
+        binding.signInText.setOnClickListener {
             val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
         }
 
         //회원가입 화면으로 이동
-        binding.signupText.setOnClickListener {
+        binding.signUpText.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }

@@ -1,6 +1,7 @@
 package com.example.studymatetwo.repository
 
 import android.content.Context
+import android.util.Log
 import com.example.studymatetwo.api.ApiResponse
 import com.example.studymatetwo.api.ApiService
 import com.example.studymatetwo.api.ApiSuccessResponse
@@ -36,7 +37,7 @@ class SignRepository @Inject constructor(private val apiService: ApiService, @Ap
     }
 
     //회원가입 서비스
-    suspend fun postSignUp(signUpDto: SignUpDto) : ApiResponse<ApiSuccessResponse>{
+    suspend fun postSignUp(signUpDto: SignUpDto) : ApiResponse<String>{
         return try{
             val response = apiService.postSignUp(signUpDto)
             ApiResponse.Success(response)
@@ -44,7 +45,7 @@ class SignRepository @Inject constructor(private val apiService: ApiService, @Ap
             ApiResponse.Error(e.message ?: "HTTP 오류 발생")
         } catch (e: IOException) {
             ApiResponse.Error(e.message ?: "네트워크 오류 발생")
-        } catch (e: Exception) {
+        } catch (e: IllegalStateException) {
             ApiResponse.Error(e.message ?: "알 수 없는 오류 발생")
         }
     }

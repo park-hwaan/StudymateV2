@@ -145,19 +145,15 @@ class SignUpActivity : AppCompatActivity() {
         viewModel.signUpResult.observe(this) { response ->
             when (response) {
                 is ApiResponse.Loading -> {
-                    Toast.makeText(this, "로그인 중...", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "회원가입 중...", Toast.LENGTH_SHORT).show()
                 }
                 is ApiResponse.Success -> {
-                    Toast.makeText(this, "회원가입 성공!", Toast.LENGTH_SHORT).show()
-                    val successResponse = response.data!!.message
-                    // 성공 메시지 또는 다음 화면으로 이동
-                    finishAffinity()  // 화면 스택 전체 제거
+                    Toast.makeText(this, "회원가입 성공!!", Toast.LENGTH_SHORT).show()
+                    finishAffinity()
                     startActivity(Intent(this, MainActivity::class.java))
                 }
                 is ApiResponse.Error -> {
-                    Toast.makeText(this, "회원가입 실패!", Toast.LENGTH_SHORT).show()
-                    val errorMessage = response.message
-                    // 오류 메시지 표시
+                    Toast.makeText(this, "회원가입 실패!!", Toast.LENGTH_SHORT).show()
                 }
             }
         }

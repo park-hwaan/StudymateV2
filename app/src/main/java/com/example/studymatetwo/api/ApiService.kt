@@ -18,5 +18,5 @@ interface ApiService {
     @POST("api/signIn")
     suspend fun postSignUp(
         @Body signUpDto : SignUpDto
-    ) : ApiSuccessResponse
+    ) : String
 }

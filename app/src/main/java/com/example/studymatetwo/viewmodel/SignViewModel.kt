@@ -24,8 +24,8 @@ class SignViewModel @Inject constructor(private val repository: SignRepository) 
     val signInResult: LiveData<ApiResponse<SignInResponseDto>> = _signInResult
 
     // 결과를 담을 MutableLiveData
-    private val _signUpResult = MutableLiveData<ApiResponse<ApiSuccessResponse>>()
-    val signUpResult: LiveData<ApiResponse<ApiSuccessResponse>> = _signUpResult
+    private val _signUpResult = MutableLiveData<ApiResponse<String>>()
+    val signUpResult: LiveData<ApiResponse<String>> = _signUpResult
 
     private val _signUpData = MutableLiveData<SignUpDto>().apply { value = SignUpDto() }
     val signUpData: LiveData<SignUpDto> get() = _signUpData
@@ -40,6 +40,7 @@ class SignViewModel @Inject constructor(private val repository: SignRepository) 
             _signInResult.value = ApiResponse.Error("입력 값을 확인해주세요")
             return
         }
+
         viewModelScope.launch(Dispatchers.IO) {
             _signInResult.postValue(ApiResponse.Loading())
             val response = repository.postSignIn(signInModel)
@@ -51,17 +52,14 @@ class SignViewModel @Inject constructor(private val repository: SignRepository) 
     fun postSignUp(signUpDto: SignUpDto){
         viewModelScope.launch(Dispatchers.IO) {
             _signUpResult.postValue(ApiResponse.Loading())  // 로딩 상태 업데이트
-            // API 호출
             val response = repository.postSignUp(signUpDto)
-            // 결과 업데이트
             _signUpResult.postValue(response)
         }
     }
 
     // 로그인 유효성 검사 로직
     private fun validateSignInModel(model: SignInDto): Boolean {
-        return model.email.isNotBlank() &&
-                model.password.isNotBlank()
+        return model.email.isNotBlank() && model.password.isNotBlank()
     }
 
     fun updateSignUpData(newData: SignUpDto) {

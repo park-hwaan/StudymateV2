@@ -1,5 +1,6 @@
 package com.example.studymatetwo.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -39,12 +40,10 @@ class SignInActivity : AppCompatActivity() {
         signViewModel.signInResult.observe(this, Observer { response ->
             when (response) {
                 is ApiResponse.Success -> {
-                    // 로그인 성공 처리
                     Toast.makeText(this, "로그인 성공!", Toast.LENGTH_SHORT).show()
-                    // 다음 액티비티로 이동 등
+                    startActivity(Intent(this, MainActivity::class.java))
                 }
                 is ApiResponse.Error -> {
-                    // 로그인 실패 처리
                     Toast.makeText(this, "로그인 실패: 비밀번호와 아이디를 확인해주세요", Toast.LENGTH_SHORT).show()
                 }
                 is ApiResponse.Loading -> {
