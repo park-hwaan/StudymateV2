@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/searchMento"
+        android:id="@+id/searchMentor"
         android:title="@string/searchMentor" />
     <item
         android:id="@+id/chat"
@@ -13,7 +13,7 @@
         android:title="@string/board" />
 
     <item
-        android:id="@+id/mypage"
+        android:id="@+id/myPage"
         android:title="@string/mypage" />
 
 </menu>
