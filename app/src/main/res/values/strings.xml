@@ -2,11 +2,10 @@
     <string name="app_name">StudyMateTwo</string>
     MainActivity
     -----------------------------------------------------------------------
-    <string name="logo1">다양한 멘티,멘토와의 협력을 통해</string>
-    <string name="logo2">함께 공부하고 성장하세요.</string>
-    <string name="logo3">공부는 스터디메이트 !</string>
+    <string name="logo1">StudyMate</string>
     <string name="login">로그인</string>
     <string name="sign_up">회원가입</string>
+    <string name="main_activity_logo1">회원이 아니신가요?</string>
 
     signupActivity
     ----------------------------------------------------------------------------------------------------
@@ -45,9 +44,17 @@
 
     navi_menu
     ----------------------------------------------------------------------------------------------------
-    <string name="searchMentor">멘토찾기</string>
+    <string name="search_mentor">멘토찾기</string>
     <string name="chat">채팅</string>
     <string name="board">게시판</string>
-    <string name="mypage">마이페이지</string>
+    <string name="my_page">마이페이지</string>
+
+    mentorSearchFragment
+    ----------------------------------------------------------------------------------------------------
+    <string name="mentor_fragment">질문에 맞는\n멘토를 추천해 드릴게요.</string>
+    <string name="edit_text_hint">상세분야를 적어주세요</string>
+    <string name="edit_text_hint2">제목을 적어주세요</string>
+    <string name="edit_text_hint3">질문 내용을 적어주세요</string>
+    <string name="search_mentor_button">멘토 검색</string>
 
 </resources>

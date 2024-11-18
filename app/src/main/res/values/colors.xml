@@ -8,7 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="kakao_yellow">#F7E600</color>
-    <color name="gray">#8E8E8E</color>
-    <color name="ligh_blue">#C5D9FA</color>
+    <color name="gray">#B6B0B0</color>
+    <color name="light_blue">#C5D9FA</color>
     <color name="main_blue">#2F43F2</color>
+    <color name="light_gray">#F2F2F2</color>
 </resources>

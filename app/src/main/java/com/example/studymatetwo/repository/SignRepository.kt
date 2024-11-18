@@ -6,14 +6,22 @@ import com.example.studymatetwo.api.ApiService
 import com.example.studymatetwo.dto.SignInDto
 import com.example.studymatetwo.dto.SignInResponseDto
 import com.example.studymatetwo.dto.SignUpDto
+import dagger.Binds
+import dagger.Module
+import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Module
+@InstallIn(SingletonComponent::class)
 class SignRepository @Inject constructor(private val apiService: ApiService, @ApplicationContext private val context: Context) {
     private val sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
 
+    @Singleton
     //로그인 서비스
     suspend fun postSignIn(signInDto: SignInDto): ApiResponse<SignInResponseDto> {
         return try {
@@ -32,6 +40,7 @@ class SignRepository @Inject constructor(private val apiService: ApiService, @Ap
         }
     }
 
+    @Singleton
     //회원가입 서비스
     suspend fun postSignUp(signUpDto: SignUpDto) : ApiResponse<String>{
         return try{

@@ -45,6 +45,6 @@
         android:textColor="@color/white"
         android:text="@string/next"
         android:textStyle="bold"
-        android:background="@drawable/sign_up_button_light_blue"/>
+        android:background="@drawable/round_button_background_blue"/>
 
 </LinearLayout>

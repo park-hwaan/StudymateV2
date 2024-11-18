@@ -13,37 +13,20 @@
         android:orientation="vertical"
         android:layout_marginTop="20dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/email"
-            android:textColor="@color/gray"/>
-
         <EditText
             android:id="@+id/editEmail"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
             android:background="@drawable/sign_up_background"
             android:importantForAutofill="no" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/password"
-            android:textColor="@color/gray"/>
-
         <EditText
             android:id="@+id/editPassword"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
             android:background="@drawable/sign_up_background"
             android:importantForAutofill="no" />
 
@@ -59,7 +42,6 @@
         android:layout_marginTop="20dp"
         android:text="@string/login"
         android:textColor="@color/white"
-        android:textStyle="bold"
-        android:background="@drawable/sign_up_button_light_blue"/>
+        android:textStyle="bold" />
 
 </LinearLayout>
