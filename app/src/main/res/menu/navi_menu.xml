@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/searchMento"
+        android:title="@string/searchMentor" />
+    <item
+        android:id="@+id/chat"
+        android:title="@string/chat" />
+
+    <item
+        android:id="@+id/board"
+        android:title="@string/board" />
+
+    <item
+        android:id="@+id/mypage"
+        android:title="@string/mypage" />
+
+</menu>

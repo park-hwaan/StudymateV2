@@ -13,9 +13,6 @@
     <string name="email">이메일</string>
     <string name="password">비밀번호</string>
     <string name="next">다음</string>
-
-    emailFragment
-    ----------------------------------------------------------------------------------------------------
     <string name="insert_email">이메일을 입력해주세요</string>
     <string name="hint_email">1234@naver.com</string>
     <string name="insert_info">본인의 정보를 입력해주세요!</string>
@@ -45,5 +42,12 @@
     <string name="password_hint">*******</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    navi_menu
+    ----------------------------------------------------------------------------------------------------
+    <string name="searchMentor">멘토찾기</string>
+    <string name="chat">채팅</string>
+    <string name="board">게시판</string>
+    <string name="mypage">마이페이지</string>
 
 </resources>
