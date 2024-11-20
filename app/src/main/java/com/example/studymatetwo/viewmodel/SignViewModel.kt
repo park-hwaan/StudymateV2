@@ -22,7 +22,6 @@ class SignViewModel @Inject constructor(private val repository: SignRepository) 
     private val _signInResult = MutableLiveData<ApiResponse<SignInResponseDto>>()
     val signInResult: LiveData<ApiResponse<SignInResponseDto>> = _signInResult
 
-    // 결과를 담을 MutableLiveData
     private val _signUpResult = MutableLiveData<ApiResponse<String>>()
     val signUpResult: LiveData<ApiResponse<String>> = _signUpResult
 
@@ -36,14 +35,13 @@ class SignViewModel @Inject constructor(private val repository: SignRepository) 
     // Sign-In using Retrofit
     fun postSignIn(signInModel: SignInDto) {
         if (!validateSignInModel(signInModel)) {
-            _signInResult.value = ApiResponse.Error("입력 값을 확인해주세요")
-            return
-        }
-
-        viewModelScope.launch(Dispatchers.IO) {
-            _signInResult.postValue(ApiResponse.Loading())
-            val response = repository.postSignIn(signInModel)
-            _signInResult.postValue(response)
+            _signInResult.value = ApiResponse.Error("입력값을 확인해주세요")
+        }else{
+            viewModelScope.launch(Dispatchers.IO) {
+                _signInResult.postValue(ApiResponse.Loading())
+                val response = repository.postSignIn(signInModel)
+                _signInResult.postValue(response)
+            }
         }
     }
 
@@ -57,7 +55,7 @@ class SignViewModel @Inject constructor(private val repository: SignRepository) 
     }
 
     // 로그인 유효성 검사 로직
-    private fun validateSignInModel(model: SignInDto): Boolean {
+    fun validateSignInModel(model: SignInDto): Boolean {
         return model.email.isNotBlank() && model.password.isNotBlank()
     }
 

@@ -1,6 +1,6 @@
 package com.example.studymatetwo.dto
 
-data class QuestionDto(
+data class MenteeQuestionDto(
     var title : String,
     var content : String,
     var interests : String,

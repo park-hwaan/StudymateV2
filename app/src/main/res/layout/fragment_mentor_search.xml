@@ -58,16 +58,42 @@
         </LinearLayout>
 
         <Spinner
-            android:id="@+id/spinner1"
+            android:id="@+id/interestsSpinner"
+            style="@style/CustomSpinnerStyle"
             android:layout_width="300dp"
             android:layout_height="0dp"
+            android:layout_gravity="center_horizontal"
             android:layout_weight="1"
-            android:layout_gravity="center_horizontal" />
+            android:theme="@style/SpinnerTheme" />
 
         <View
             android:layout_width="300dp"
             android:layout_height="1dp"
             android:background="@color/main_blue" />
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="제목"
+                android:textColor="@color/light_blue"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <EditText
+            android:id="@+id/editTitle"
+            android:layout_width="300dp"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
+            android:backgroundTint="@color/main_blue"
+            android:hint="@string/edit_text_hint2"
+            android:textColorHint="@color/gray"
+            android:textSize="14sp" />
 
         <LinearLayout
             android:layout_width="300dp"
@@ -92,29 +118,6 @@
             android:textColorHint="@color/gray"
             android:backgroundTint="@color/main_blue"
             android:hint="@string/edit_text_hint"/>
-        <LinearLayout
-            android:layout_width="300dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="제목"
-                android:textColor="@color/light_blue"
-                android:textStyle="bold" />
-        </LinearLayout>
-        <EditText
-            android:id="@+id/editTitle"
-            android:layout_width="300dp"
-            android:layout_height="0dp"
-            android:layout_weight="1.5"
-            android:backgroundTint="@color/main_blue"
-            android:hint="@string/edit_text_hint2"
-            android:textColorHint="@color/gray"
-            android:textSize="14sp" />
         <LinearLayout
             android:layout_width="300dp"
             android:layout_height="0dp"

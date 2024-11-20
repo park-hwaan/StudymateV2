@@ -35,7 +35,7 @@
             android:id="@+id/editEmail"
             android:layout_width="match_parent"
             android:hint="@string/id"
-            android:drawableStart="@drawable/baseline_person_24"
+            android:drawableStart="@drawable/icon_person"
             android:textColorHint="@color/light_gray"
             android:padding="15dp"
             android:layout_height="60dp"
@@ -48,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:hint="@string/password"
-            android:drawableStart="@drawable/baseline_lock_24"
+            android:drawableStart="@drawable/icon_lock"
             android:padding="15dp"
             android:textColorHint="@color/light_gray"
             android:layout_marginStart="50dp"
@@ -113,17 +113,17 @@
             <ImageView
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:src="@drawable/naver_logo"/>
+                android:src="@drawable/icon_naver"/>
             <ImageView
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_marginStart="20dp"
-                android:src="@drawable/kakao_logo"/>
+                android:src="@drawable/icon_kakao"/>
             <ImageView
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_marginStart="20dp"
-                android:src="@drawable/google_logo"/>
+                android:src="@drawable/icon_google"/>
 
         </LinearLayout>
 
