@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             when (response) {
                 is ApiResponse.Success -> {
                     Toast.makeText(this, "로그인 성공!", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, HomeActivity::class.java)
+                    val intent = Intent(this, MentorSearchActivity::class.java)
                     startActivity(intent)
                 }
                 is ApiResponse.Error -> {

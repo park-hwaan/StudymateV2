@@ -38,11 +38,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/major_select_background"
             android:text="@string/web_app"
-            android:textSize="20sp"
-            android:textStyle="bold"
             android:textColor="@drawable/selected_text"
-            android:background="@drawable/major_select_background"/>
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/majorBtn2"

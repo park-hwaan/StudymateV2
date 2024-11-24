@@ -39,7 +39,6 @@ class SignUpActivity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
                 viewModel.previousCursor()
                 decreaseProgress()
-                changeState()
             } else finish()
         }
     }
@@ -89,7 +88,6 @@ class SignUpActivity : AppCompatActivity() {
                     changeFragment(fragmentList[viewModel.cursor.value!!])
                     viewModel.nextCursor()
                     increaseProgress()
-                    changeState()
                 }
             }
         }
@@ -103,11 +101,6 @@ class SignUpActivity : AppCompatActivity() {
             .replace(R.id.frameLayout, fragment)
             .addToBackStack(null)
             .commit()
-    }
-
-    private fun changeState() {
-        // 현재 커서 상태에 따라 필요한 로직 추가
-        Log.d("parkHwan", "현재 커서: ${viewModel.cursor.value}")
     }
 
     fun receiveData(fragment: Fragment, data: String) {

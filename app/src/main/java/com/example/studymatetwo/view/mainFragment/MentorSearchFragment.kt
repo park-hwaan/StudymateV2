@@ -68,7 +68,7 @@ class MentorSearchFragment : Fragment() {
             5 -> "PROGRAMMING"
             else -> "PROGRAMMING"
         }
-        return interests.toString()
+        return interests
     }
 
     private fun postQuestionObserve(){

@@ -52,7 +52,7 @@
 
     mentorSearchFragment
     ----------------------------------------------------------------------------------------------------
-    <string name="mentor_fragment">질문에 맞는\n멘토를 추천해 드릴게요.</string>
+    <string name="mentor_search_fragment">관심분야와 상세분야를\n선택해주세요.</string>
     <string name="edit_text_hint">상세분야를 적어주세요</string>
     <string name="edit_text_hint2">제목을 적어주세요</string>
     <string name="edit_text_hint3">질문 내용을 적어주세요</string>

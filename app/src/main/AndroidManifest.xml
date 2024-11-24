@@ -16,10 +16,10 @@
         android:theme="@style/Theme.StudyMateTwo"
         tools:targetApi="31">
         <activity
-            android:name=".view.HomeActivity"
+            android:name=".view.MentorSearchActivity"
             android:exported="false" />
         <activity
-            android:name=".view.SignInActivity"
+            android:name=".view.HomeActivity"
             android:exported="false" />
         <activity
             android:name=".view.SignUpActivity"
