@@ -2,24 +2,26 @@ package com.example.studymatetwo.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import com.example.studymatetwo.R
-import com.example.studymatetwo.databinding.ActivityMainBinding
 import com.example.studymatetwo.databinding.ActivityMentorSearchBinding
 import com.example.studymatetwo.dto.SignUpDto
-import com.example.studymatetwo.view.mentorSearchFragment.InterestFragment
-import com.example.studymatetwo.view.signUpFragment.*
+import com.example.studymatetwo.view.mentorSearchFragment.QuestionContentFragment
+import com.example.studymatetwo.view.mentorSearchFragment.QuestionInterestFragment
+import com.example.studymatetwo.viewmodel.MentorSearchViewModel
 import com.example.studymatetwo.viewmodel.SignViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MentorSearchActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMentorSearchBinding
-    private val viewModel: SignViewModel by viewModels()
+    private val viewModel: MentorSearchViewModel by viewModels()
 
     private val fragmentList : List<Fragment> = listOf(
-        InterestFragment()
+        QuestionInterestFragment(),
+        QuestionContentFragment()
     )
 
     private val callback = object : OnBackPressedCallback(true) {
@@ -53,7 +55,7 @@ class MentorSearchActivity : AppCompatActivity() {
         // 시작 프래그먼트 로드
         supportFragmentManager
             .beginTransaction()
-            .add(R.id.frameLayout, InterestFragment())
+            .add(R.id.frameLayout, QuestionInterestFragment())
             .addToBackStack(null)
             .commit()
 
@@ -69,8 +71,7 @@ class MentorSearchActivity : AppCompatActivity() {
         binding.nextBtn.setOnClickListener {
             if (viewModel.cursor.value!! <= fragmentList.size) {
                 if (viewModel.cursor.value == fragmentList.size) {
-                    // 마지막 프래그먼트에서 회원가입 함수 호출
-                    viewModel.postSignUp(viewModel.signUpData.value ?: SignUpDto())
+                    //여기다 마지막 프래그먼트 일때 viewmodel.postquestion호출
                 } else {
                     // 다음 프래그먼트로 이동
                     changeFragment(fragmentList[viewModel.cursor.value!!])
