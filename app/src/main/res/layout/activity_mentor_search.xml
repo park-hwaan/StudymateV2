@@ -52,7 +52,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="step 1/2"
+        android:text="Step 1/2"
         android:layout_gravity="center"
         android:textColor="@color/dark_blue"/>
 

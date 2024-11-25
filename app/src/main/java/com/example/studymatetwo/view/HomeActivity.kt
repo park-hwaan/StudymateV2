@@ -8,7 +8,7 @@ import com.example.studymatetwo.databinding.ActivityHomeBinding
 import com.example.studymatetwo.view.mainFragment.BoardFragment
 import com.example.studymatetwo.view.mainFragment.ChatFragment
 import com.example.studymatetwo.view.mainFragment.MentorSearchFragment
-import com.example.studymatetwo.view.mainFragment.MypageFragment
+import com.example.studymatetwo.view.mainFragment.MyPageFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,7 +33,7 @@ class HomeActivity : AppCompatActivity() {
             R.id.searchMentor -> MentorSearchFragment()
             R.id.chat -> ChatFragment() // 각 메뉴에 맞는 프래그먼트로 수정
             R.id.board -> BoardFragment()
-            R.id.myPage -> MypageFragment()
+            R.id.myPage -> MyPageFragment()
             else -> null
         }
         return if (fragment != null) {

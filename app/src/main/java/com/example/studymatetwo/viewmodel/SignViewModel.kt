@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.studymatetwo.api.ApiResponse
+import com.example.studymatetwo.dto.MyInfoDto
 import com.example.studymatetwo.dto.SignInDto
 import com.example.studymatetwo.dto.SignInResponseDto
 import com.example.studymatetwo.dto.SignUpDto
@@ -28,11 +29,9 @@ class SignViewModel @Inject constructor(private val repository: SignRepository) 
     private val _signUpData = MutableLiveData<SignUpDto>().apply { value = SignUpDto() }
     val signUpData: LiveData<SignUpDto> get() = _signUpData
 
-    //프래그먼트 위치
     private val _cursor = MutableLiveData<Int>(1)
     val cursor: LiveData<Int> get() = _cursor
 
-    // Sign-In using Retrofit
     fun postSignIn(signInModel: SignInDto) {
         if (!validateSignInModel(signInModel)) {
             _signInResult.value = ApiResponse.Error("입력값을 확인해주세요")
@@ -45,7 +44,6 @@ class SignViewModel @Inject constructor(private val repository: SignRepository) 
         }
     }
 
-    // fun postSignUp
     fun postSignUp(signUpDto: SignUpDto){
         viewModelScope.launch(Dispatchers.IO) {
             _signUpResult.postValue(ApiResponse.Loading())  // 로딩 상태 업데이트
@@ -54,7 +52,6 @@ class SignViewModel @Inject constructor(private val repository: SignRepository) 
         }
     }
 
-    // 로그인 유효성 검사 로직
     fun validateSignInModel(model: SignInDto): Boolean {
         return model.email.isNotBlank() && model.password.isNotBlank()
     }

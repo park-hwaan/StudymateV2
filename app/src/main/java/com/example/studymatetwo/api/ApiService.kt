@@ -1,9 +1,6 @@
 package com.example.studymatetwo.api
 
-import com.example.studymatetwo.dto.MenteeQuestionDto
-import com.example.studymatetwo.dto.SignInDto
-import com.example.studymatetwo.dto.SignInResponseDto
-import com.example.studymatetwo.dto.SignUpDto
+import com.example.studymatetwo.dto.*
 import retrofit2.http.Body
 import retrofit2.http.Header
 import retrofit2.http.POST
@@ -30,4 +27,12 @@ interface ApiService {
         @Header("Authorization") authorization: String,
         @Body quesInfo: MenteeQuestionDto
     ): String
+
+    //자기 계정정보 불러오가
+    @POST("api/question")
+    suspend fun getUserInfo(
+        @Header("Authorization") authorization: String
+    ): MyInfoDto
+
+
 }

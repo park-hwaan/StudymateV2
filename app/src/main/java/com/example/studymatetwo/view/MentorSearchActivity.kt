@@ -25,24 +25,6 @@ class MentorSearchActivity : AppCompatActivity() {
         QuestionContentFragment()
     )
 
-    private val callback = object : OnBackPressedCallback(true) {
-        override fun handleOnBackPressed() {
-            if (viewModel.cursor.value!! > 1) {
-                supportFragmentManager.popBackStack()
-                viewModel.previousCursor()
-                decreaseProgress()
-            } else finish()
-        }
-    }
-
-    private fun increaseProgress(){
-        binding.progressBar.progress += 1
-    }
-
-    private fun decreaseProgress(){
-        binding.progressBar.progress -= 1
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMentorSearchBinding.inflate(layoutInflater)
@@ -69,7 +51,6 @@ class MentorSearchActivity : AppCompatActivity() {
                 if (viewModel.cursor.value == fragmentList.size) {
                     //여기다 마지막 프래그먼트 일때 viewmodel.postquestion호출
                 } else {
-                    // 다음 프래그먼트로 이동
                     changeFragment(fragmentList[viewModel.cursor.value!!])
                     viewModel.nextCursor()
                     increaseProgress()
@@ -78,6 +59,24 @@ class MentorSearchActivity : AppCompatActivity() {
         }
 
         nextBtnObserve()
+    }
+
+    private val callback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            if (viewModel.cursor.value!! > 1) {
+                supportFragmentManager.popBackStack()
+                viewModel.previousCursor()
+                decreaseProgress()
+            } else finish()
+        }
+    }
+
+    private fun increaseProgress(){
+        binding.progressBar.progress += 1
+    }
+
+    private fun decreaseProgress(){
+        binding.progressBar.progress -= 1
     }
     private fun changeFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
