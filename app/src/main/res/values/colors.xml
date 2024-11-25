@@ -9,7 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="kakao_yellow">#F7E600</color>
     <color name="gray">#B6B0B0</color>
-    <color name="light_blue">#C5D9FA</color>
-    <color name="main_blue">#2F43F2</color>
+    <color name="light_blue">#88B3FF</color>
+    <color name="main_blue">#346CEA</color>
     <color name="light_gray">#F2F2F2</color>
+    <color name="dark_blue">#3876F2</color>
 </resources>

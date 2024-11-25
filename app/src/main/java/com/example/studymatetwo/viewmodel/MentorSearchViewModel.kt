@@ -1,5 +1,6 @@
 package com.example.studymatetwo.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -22,8 +23,13 @@ class MentorSearchViewModel @Inject constructor(private val repository: MentorSe
     private val _questionData = MutableLiveData<MenteeQuestionDto>().apply { value = MenteeQuestionDto() }
     val questionData: LiveData<MenteeQuestionDto> get() = _questionData
 
+    private val _nextBtnText = MutableLiveData<String>().apply { value = "다음" }
+    val nextBtnText: LiveData<String> = _nextBtnText
+
     private val _cursor = MutableLiveData<Int>(1)
     val cursor: LiveData<Int> get() = _cursor
+
+    private val lastCursor = 2
 
     fun postMenteeQuestion(userToken: String, menteeQuestionDto: MenteeQuestionDto){
        if(!validateQuestionModel(menteeQuestionDto)){
@@ -43,7 +49,13 @@ class MentorSearchViewModel @Inject constructor(private val repository: MentorSe
     }
 
     fun nextCursor() {
-        _cursor.value = (_cursor.value ?: 1) + 1
+        val currentCursor = _cursor.value ?: 1
+        if (currentCursor + 1 == lastCursor) {
+            _nextBtnText.value = "완료"
+        } else {
+            _nextBtnText.value = "다음"
+        }
+        _cursor.value = currentCursor + 1
     }
 
     fun previousCursor() {

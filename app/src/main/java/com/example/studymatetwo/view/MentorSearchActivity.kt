@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.example.studymatetwo.R
 import com.example.studymatetwo.databinding.ActivityMentorSearchBinding
 import com.example.studymatetwo.dto.SignUpDto
@@ -52,12 +53,7 @@ class MentorSearchActivity : AppCompatActivity() {
         binding.progressBar.max = fragmentList.size
         binding.progressBar.progress = 1
 
-        // 시작 프래그먼트 로드
-        supportFragmentManager
-            .beginTransaction()
-            .add(R.id.frameLayout, QuestionInterestFragment())
-            .addToBackStack(null)
-            .commit()
+        changeFragment(QuestionInterestFragment())
 
         // 뒤로가기 이미지 클릭 이벤트
         binding.backImg.setOnClickListener {
@@ -80,6 +76,8 @@ class MentorSearchActivity : AppCompatActivity() {
                 }
             }
         }
+
+        nextBtnObserve()
     }
     private fun changeFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
@@ -88,4 +86,9 @@ class MentorSearchActivity : AppCompatActivity() {
             .commit()
     }
 
+    private fun nextBtnObserve(){
+        viewModel.nextBtnText.observe(this, Observer {
+            binding.nextBtn.text = it
+        })
+    }
 }

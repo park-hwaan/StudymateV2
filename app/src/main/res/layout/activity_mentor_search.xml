@@ -52,9 +52,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="step1/2"
+        android:text="step 1/2"
         android:layout_gravity="center"
-        android:textColor="@color/light_blue"/>
+        android:textColor="@color/dark_blue"/>
 
     <FrameLayout
         android:id="@+id/frameLayout"
@@ -68,7 +68,6 @@
         android:layout_height="40dp"
         android:textColor="@color/white"
         android:layout_gravity="center"
-        android:text="@string/next"
         android:textStyle="bold"
         android:textSize="17sp"
         android:background="@drawable/round_button_background_blue"/>
