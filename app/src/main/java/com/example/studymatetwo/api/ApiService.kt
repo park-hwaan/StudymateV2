@@ -2,6 +2,7 @@ package com.example.studymatetwo.api
 
 import com.example.studymatetwo.dto.*
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 import javax.inject.Singleton
@@ -29,7 +30,7 @@ interface ApiService {
     ): String
 
     //자기 계정정보 불러오가
-    @POST("api/question")
+    @GET("api/user")
     suspend fun getUserInfo(
         @Header("Authorization") authorization: String
     ): MyInfoDto

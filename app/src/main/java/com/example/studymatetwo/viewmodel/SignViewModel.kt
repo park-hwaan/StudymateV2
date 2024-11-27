@@ -20,6 +20,9 @@ import javax.inject.Inject
 @HiltViewModel
 class SignViewModel @Inject constructor(private val repository: SignRepository) : ViewModel()  {
 
+    private val _myInfoData = MutableLiveData<ApiResponse<MyInfoDto>>()
+    val myInfoData: LiveData<ApiResponse<MyInfoDto>> = _myInfoData
+
     private val _signInResult = MutableLiveData<ApiResponse<SignInResponseDto>>()
     val signInResult: LiveData<ApiResponse<SignInResponseDto>> = _signInResult
 
@@ -31,6 +34,13 @@ class SignViewModel @Inject constructor(private val repository: SignRepository) 
 
     private val _cursor = MutableLiveData<Int>(1)
     val cursor: LiveData<Int> get() = _cursor
+
+    fun getMyInfo(userToken: String){
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = repository.getMyAccountInfo(userToken)
+            _myInfoData.postValue(response)
+        }
+    }
 
     fun postSignIn(signInModel: SignInDto) {
         if (!validateSignInModel(signInModel)) {
@@ -52,7 +62,7 @@ class SignViewModel @Inject constructor(private val repository: SignRepository) 
         }
     }
 
-    fun validateSignInModel(model: SignInDto): Boolean {
+    private fun validateSignInModel(model: SignInDto): Boolean {
         return model.email.isNotBlank() && model.password.isNotBlank()
     }
 

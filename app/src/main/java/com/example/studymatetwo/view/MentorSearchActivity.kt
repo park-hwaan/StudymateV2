@@ -1,5 +1,6 @@
 package com.example.studymatetwo.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
@@ -36,6 +37,11 @@ class MentorSearchActivity : AppCompatActivity() {
         binding.progressBar.progress = 1
 
         changeFragment(QuestionInterestFragment())
+
+        binding.skipText.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+        }
 
         // 뒤로가기 이미지 클릭 이벤트
         binding.backImg.setOnClickListener {
