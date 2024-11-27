@@ -16,6 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MentorSearchViewModel @Inject constructor(private val repository: MentorSearchRepository) : ViewModel() {
+    private val _progressBarValue = MutableLiveData<Int>(1)
+    val progressBarValue: LiveData<Int> get() = _progressBarValue
 
     private val _postMenteeQuestionResult = MutableLiveData<ApiResponse<String>>()
     val postMenteeQuestionResult: LiveData<ApiResponse<String>> = _postMenteeQuestionResult
@@ -48,6 +50,10 @@ class MentorSearchViewModel @Inject constructor(private val repository: MentorSe
                 model.specificField.isNotBlank()
     }
 
+    private fun updateProgressBarValue(newValue: Int) {
+        _progressBarValue.value = newValue
+    }
+
     fun nextCursor() {
         val currentCursor = _cursor.value ?: 1
         if (currentCursor + 1 == lastCursor) {
@@ -56,10 +62,13 @@ class MentorSearchViewModel @Inject constructor(private val repository: MentorSe
             _nextBtnText.value = "다음"
         }
         _cursor.value = currentCursor + 1
+        updateProgressBarValue(currentCursor + 1)
     }
 
     fun previousCursor() {
-        _cursor.value = (_cursor.value ?: 1) - 1
+        val currentCursor = (_cursor.value ?: 1) - 1
+        _cursor.value = currentCursor
+        updateProgressBarValue(currentCursor)
     }
 
     fun updateSignUpData(newData: MenteeQuestionDto) {

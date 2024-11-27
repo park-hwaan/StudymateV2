@@ -27,8 +27,8 @@
 
         <ProgressBar
             android:id="@+id/progressBar"
-            android:max="100"
-            android:progress="16"
+            android:max="2"
+            android:progress="1"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:progressDrawable="@drawable/progressbar"
             android:layout_width="150dp"

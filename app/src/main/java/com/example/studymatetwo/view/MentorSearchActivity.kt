@@ -9,11 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.studymatetwo.R
 import com.example.studymatetwo.databinding.ActivityMentorSearchBinding
-import com.example.studymatetwo.dto.SignUpDto
 import com.example.studymatetwo.view.mentorSearchFragment.QuestionContentFragment
 import com.example.studymatetwo.view.mentorSearchFragment.QuestionInterestFragment
 import com.example.studymatetwo.viewmodel.MentorSearchViewModel
-import com.example.studymatetwo.viewmodel.SignViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,9 +31,6 @@ class MentorSearchActivity : AppCompatActivity() {
 
         this.onBackPressedDispatcher.addCallback(this, callback)
 
-        binding.progressBar.max = fragmentList.size
-        binding.progressBar.progress = 1
-
         changeFragment(QuestionInterestFragment())
 
         binding.skipText.setOnClickListener {
@@ -48,7 +43,6 @@ class MentorSearchActivity : AppCompatActivity() {
             if(viewModel.cursor.value!! > 1){
                 supportFragmentManager.popBackStack()
                 viewModel.previousCursor()
-                decreaseProgress()
             } else finish()
         }
 
@@ -59,12 +53,12 @@ class MentorSearchActivity : AppCompatActivity() {
                 } else {
                     changeFragment(fragmentList[viewModel.cursor.value!!])
                     viewModel.nextCursor()
-                    increaseProgress()
                 }
             }
         }
 
-        nextBtnObserve()
+        observeNextBtn()
+        observeProgressBar()
     }
 
     private val callback = object : OnBackPressedCallback(true) {
@@ -72,18 +66,10 @@ class MentorSearchActivity : AppCompatActivity() {
             if (viewModel.cursor.value!! > 1) {
                 supportFragmentManager.popBackStack()
                 viewModel.previousCursor()
-                decreaseProgress()
             } else finish()
         }
     }
 
-    private fun increaseProgress(){
-        binding.progressBar.progress += 1
-    }
-
-    private fun decreaseProgress(){
-        binding.progressBar.progress -= 1
-    }
     private fun changeFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.frameLayout, fragment)
@@ -91,9 +77,15 @@ class MentorSearchActivity : AppCompatActivity() {
             .commit()
     }
 
-    private fun nextBtnObserve(){
+    private fun observeNextBtn(){
         viewModel.nextBtnText.observe(this, Observer {
             binding.nextBtn.text = it
+        })
+    }
+
+    private fun observeProgressBar() {
+        viewModel.progressBarValue.observe(this, Observer { progress ->
+            binding.progressBar.progress = progress
         })
     }
 }
