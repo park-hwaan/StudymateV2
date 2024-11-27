@@ -53,8 +53,14 @@
     mentorSearchFragment
     ----------------------------------------------------------------------------------------------------
     <string name="mentor_search_fragment">관심분야와 상세분야를\n선택해주세요.</string>
+    <string name="mentor_search_fragment_2">제목과 질문 내용을\n입력해주세요.</string>
+    <string name="mentor_search_fragment_3">제목을 입력해주세요.</string>
+    <string name="mentor_search_fragment_4">질문내용을 작성해주세요.</string>
     <string name="interest">관심분야</string>
     <string name="specify_field">상세분야</string>
     <string name="put_specify_field">상세분야를 입력해주세요</string>
+    <string name="title">제목</string>
+    <string name="content">질문내용</string>
+
 
 </resources>

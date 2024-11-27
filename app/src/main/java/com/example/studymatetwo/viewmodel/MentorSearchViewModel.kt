@@ -65,11 +65,18 @@ class MentorSearchViewModel @Inject constructor(private val repository: MentorSe
         updateProgressBarValue(currentCursor + 1)
     }
 
-    fun previousCursor() {
+    fun ㅂ() {
         val currentCursor = (_cursor.value ?: 1) - 1
         _cursor.value = currentCursor
         updateProgressBarValue(currentCursor)
+
+        if (currentCursor != lastCursor) {
+            _nextBtnText.value = "다음"
+        } else {
+            _nextBtnText.value = "완료"
+        }
     }
+
 
     fun updateSignUpData(newData: MenteeQuestionDto) {
         _questionData.value = newData
