@@ -104,12 +104,9 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     fun receiveData(fragment: Fragment, data: String) {
-
-        // JSON 문자열을 JSONObject로 파싱
         val jsonObject = JSONObject(data)
-
-        // signUpData 업데이트
         val currentData = viewModel.signUpData.value ?:SignUpDto()
+
         when (fragment) {
             is EmailFragment -> currentData!!.email = jsonObject.optString("email", "")
             is PasswordFragment -> currentData!!.password = jsonObject.optString("password", "")
@@ -128,9 +125,6 @@ class SignUpActivity : AppCompatActivity() {
             }
         }
         viewModel.updateSignUpData(currentData)
-
-        // 로그에 출력
-        Log.d("parkHwan", "userData: $currentData")
     }
 
     //회원가입 observe

@@ -26,9 +26,7 @@ class MajorPartFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
-        Log.d("parkHwan", "성별 프라그먼트 onStop() 호출")
 
-        // 선택된 버튼에 따라 JSON 형식의 문자열 생성
         val selectedButtonText = when {
             binding.majorBtn1.isSelected -> translateToEnglish(binding.majorBtn1.text.toString())
             binding.majorBtn2.isSelected -> translateToEnglish(binding.majorBtn2.text.toString())

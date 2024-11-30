@@ -65,7 +65,7 @@ class MentorSearchViewModel @Inject constructor(private val repository: MentorSe
         updateProgressBarValue(currentCursor + 1)
     }
 
-    fun ㅂ() {
+    fun previousCursor() {
         val currentCursor = (_cursor.value ?: 1) - 1
         _cursor.value = currentCursor
         updateProgressBarValue(currentCursor)
@@ -78,7 +78,7 @@ class MentorSearchViewModel @Inject constructor(private val repository: MentorSe
     }
 
 
-    fun updateSignUpData(newData: MenteeQuestionDto) {
+    fun updateQuestionData(newData: MenteeQuestionDto) {
         _questionData.value = newData
     }
 }
