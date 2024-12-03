@@ -6,24 +6,28 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.studymatetwo.api.ApiResponse
-import com.example.studymatetwo.dto.MenteeQuestionDto
-import com.example.studymatetwo.dto.SignUpDto
+import com.example.studymatetwo.dto.*
 import com.example.studymatetwo.repository.MentorSearchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class MentorSearchViewModel @Inject constructor(private val repository: MentorSearchRepository) : ViewModel() {
+
     private val _progressBarValue = MutableLiveData<Int>(1)
     val progressBarValue: LiveData<Int> get() = _progressBarValue
 
-    private val _postMenteeQuestionResult = MutableLiveData<ApiResponse<String>>()
-    val postMenteeQuestionResult: LiveData<ApiResponse<String>> = _postMenteeQuestionResult
+    private val _postMenteeQuestionResult = MutableLiveData<ApiResponse<MenteeQuestionResponseDto>>()
+    val postMenteeQuestionResult: LiveData<ApiResponse<MenteeQuestionResponseDto>> get() = _postMenteeQuestionResult
 
     private val _questionData = MutableLiveData<MenteeQuestionDto>().apply { value = MenteeQuestionDto() }
     val questionData: LiveData<MenteeQuestionDto> get() = _questionData
+
+    private var _mutableMentorList = MutableLiveData<List<MentorDto>>(emptyList())
+    val mentorList: LiveData<List<MentorDto>> get() = _mutableMentorList
 
     private val _nextBtnText = MutableLiveData<String>().apply { value = "다음" }
     val nextBtnText: LiveData<String> = _nextBtnText
@@ -31,7 +35,7 @@ class MentorSearchViewModel @Inject constructor(private val repository: MentorSe
     private val _cursor = MutableLiveData<Int>(1)
     val cursor: LiveData<Int> get() = _cursor
 
-    private val lastCursor = 2
+    private val lastCursor = 3
 
     fun postMenteeQuestion(userToken: String, menteeQuestionDto: MenteeQuestionDto){
        if(!validateQuestionModel(menteeQuestionDto)){
@@ -43,6 +47,14 @@ class MentorSearchViewModel @Inject constructor(private val repository: MentorSe
            }
        }
     }
+
+    fun getMentorList(userToken: String, questionId: String){
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = repository.getMentorList(userToken, questionId)
+            _mutableMentorList.postValue(response)
+        }
+    }
+
 
     private fun validateQuestionModel(model: MenteeQuestionDto): Boolean {
         return model.title.isNotBlank() &&
@@ -57,7 +69,7 @@ class MentorSearchViewModel @Inject constructor(private val repository: MentorSe
     fun nextCursor() {
         val currentCursor = _cursor.value ?: 1
         if (currentCursor + 1 == lastCursor) {
-            _nextBtnText.value = "완료"
+            _nextBtnText.value = "멘토검색"
         } else {
             _nextBtnText.value = "다음"
         }

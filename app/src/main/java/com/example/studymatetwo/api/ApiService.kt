@@ -5,6 +5,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.Path
 import javax.inject.Singleton
 
 @Singleton
@@ -27,7 +28,14 @@ interface ApiService {
     suspend fun postQuestion(
         @Header("Authorization") authorization: String,
         @Body quesInfo: MenteeQuestionDto
-    ): String
+    ): MenteeQuestionResponseDto
+
+    //질문에 대한 멘토리스트 불러오기
+    @GET("api/matching/{questionId}")
+    suspend fun getMentorList(
+        @Header("Authorization") authorization: String,
+        @Path("questionId") questionId : String
+    ): MentorListDto
 
     //자기 계정정보 불러오가
     @GET("api/user")

@@ -5,6 +5,9 @@ import android.content.SharedPreferences
 import com.example.studymatetwo.api.ApiResponse
 import com.example.studymatetwo.api.ApiService
 import com.example.studymatetwo.dto.MenteeQuestionDto
+import com.example.studymatetwo.dto.MenteeQuestionResponseDto
+import com.example.studymatetwo.dto.MentorDto
+import com.example.studymatetwo.dto.MentorListDto
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -19,7 +22,7 @@ import javax.inject.Singleton
 class MentorSearchRepository @Inject constructor(private val apiService: ApiService) {
 
     @Singleton
-    suspend fun postQuestion(userToken: String, menteeQuestionDto: MenteeQuestionDto) : ApiResponse<String>{
+    suspend fun postQuestion(userToken: String, menteeQuestionDto: MenteeQuestionDto) : ApiResponse<MenteeQuestionResponseDto>{
         return try {
             val response = apiService.postQuestion(userToken, menteeQuestionDto)
             ApiResponse.Success(response)
@@ -29,6 +32,20 @@ class MentorSearchRepository @Inject constructor(private val apiService: ApiServ
             ApiResponse.Error(e.message ?: "네트워크 오류 발생")
         } catch (e: IllegalStateException) {
             ApiResponse.Error(e.message ?: "알 수 없는 오류 발생")
+        }
+    }
+
+    @Singleton
+    suspend fun getMentorList(userToken: String, questionId: String) : List<MentorDto>{
+        return try{
+            val response = apiService.getMentorList(userToken, questionId)
+            response.memberList
+        }catch (e: HttpException) {
+           emptyList()
+        } catch (e: IOException) {
+            emptyList()
+        } catch (e: IllegalStateException) {
+            emptyList()
         }
     }
 }

@@ -6,14 +6,17 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.studymatetwo.R
+import com.example.studymatetwo.api.ApiResponse
 import com.example.studymatetwo.databinding.ActivityMentorSearchBinding
 import com.example.studymatetwo.dto.MenteeQuestionDto
 import com.example.studymatetwo.dto.SignUpDto
+import com.example.studymatetwo.view.mentorSearchFragment.MentorListFragment
 import com.example.studymatetwo.view.mentorSearchFragment.QuestionContentFragment
 import com.example.studymatetwo.view.mentorSearchFragment.QuestionInterestFragment
 import com.example.studymatetwo.view.signUpFragment.*
@@ -29,7 +32,8 @@ class MentorSearchActivity : AppCompatActivity() {
 
     private val fragmentList : List<Fragment> = listOf(
         QuestionInterestFragment(),
-        QuestionContentFragment()
+        QuestionContentFragment(),
+        MentorListFragment()
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +51,7 @@ class MentorSearchActivity : AppCompatActivity() {
         binding.skipText.setOnClickListener {
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         // 뒤로가기 이미지 클릭 이벤트
@@ -59,11 +64,16 @@ class MentorSearchActivity : AppCompatActivity() {
 
         binding.nextBtn.setOnClickListener {
             if (viewModel.cursor.value!! <= fragmentList.size) {
-                if (viewModel.cursor.value == fragmentList.size) {
-                    viewModel.postMenteeQuestion("Bearer $userToken",viewModel.questionData.value ?: MenteeQuestionDto())
-                } else {
+                if (viewModel.cursor.value == 3) {
+                    viewModel.postMenteeQuestion("Bearer $userToken", viewModel.questionData.value ?: MenteeQuestionDto())
+                    observerMentorList()
+                    observerMentor()
+                    Log.d("MentorSearchActivity", "Cursor after increment: ${viewModel.cursor.value}")
+                }
+                else {
                     changeFragment(fragmentList[viewModel.cursor.value!!])
                     viewModel.nextCursor()
+                    Log.d("MentorSearchActivity", "Cursor after increment: ${viewModel.cursor.value}")
                 }
             }
         }
@@ -101,7 +111,7 @@ class MentorSearchActivity : AppCompatActivity() {
     private fun changeFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.frameLayout, fragment)
-            .addToBackStack(null)
+            .addToBackStack(fragment::class.java.simpleName)
             .commit()
     }
 
@@ -114,6 +124,42 @@ class MentorSearchActivity : AppCompatActivity() {
     private fun observeProgressBar() {
         viewModel.progressBarValue.observe(this, Observer { progress ->
             binding.progressBar.progress = progress
+            binding.currentStateText.text = progress.toString()
         })
     }
+
+    private fun observerMentorList(){
+        sharedPreferences = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val userToken = sharedPreferences.getString("userToken", "").toString()
+
+        viewModel.postMenteeQuestionResult.observe(this, Observer { response ->
+            when (response) {
+                is ApiResponse.Loading -> { }
+                is ApiResponse.Success -> {
+                    val questionId = response.data!!.id
+                    viewModel.getMentorList("Bearer $userToken", questionId)
+                }
+                is ApiResponse.Error -> {
+                    Toast.makeText(this, "입력 내용을 확인해주세요ㅂㅈ!", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+    }
+
+    private fun observerMentor(){
+        viewModel.mentorList.observe(this, Observer {
+            it?.let{
+                val existingFragment = supportFragmentManager.findFragmentByTag(MentorListFragment::class.java.simpleName)
+               if(existingFragment == null){
+                   val mentorListFragment = MentorListFragment().apply {
+                       arguments = Bundle().apply {
+                           putParcelableArrayList("mentorList", ArrayList(it))
+                       }
+                   }
+                   changeFragment(mentorListFragment)
+               }
+            }
+        })
+    }
+
 }

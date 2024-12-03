@@ -10,9 +10,10 @@ import com.example.studymatetwo.databinding.FragmentEmailBinding
 import com.example.studymatetwo.databinding.FragmentInterestBinding
 import com.example.studymatetwo.view.MentorSearchActivity
 import com.example.studymatetwo.view.SignUpActivity
+import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
 
-
+@AndroidEntryPoint
 class QuestionInterestFragment : Fragment() {
     lateinit var binding : FragmentInterestBinding
 
@@ -28,8 +29,8 @@ class QuestionInterestFragment : Fragment() {
         }
 
         val jsonData = JSONObject().apply {
-            put("content", binding.editContent.text.toString())
-            put("specify", selectedSpecifyButton)
+            put("specify", binding.editSpecify.text.toString())
+            put("interests", "PROGRAMMING")
         }.toString()
 
         val mainActivity = activity as MentorSearchActivity

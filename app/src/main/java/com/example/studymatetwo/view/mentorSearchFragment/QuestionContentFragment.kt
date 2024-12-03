@@ -9,8 +9,9 @@ import com.example.studymatetwo.R
 import com.example.studymatetwo.databinding.FragmentMajorPartBinding
 import com.example.studymatetwo.databinding.FragmentQuestionContentBinding
 import com.example.studymatetwo.view.MentorSearchActivity
+import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
-
+@AndroidEntryPoint
 class QuestionContentFragment : Fragment() {
     private lateinit var binding : FragmentQuestionContentBinding
     override fun onStop() {
