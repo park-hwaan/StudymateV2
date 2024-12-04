@@ -7,7 +7,6 @@ import com.example.studymatetwo.R
 import com.example.studymatetwo.databinding.ActivityHomeBinding
 import com.example.studymatetwo.view.mainFragment.BoardFragment
 import com.example.studymatetwo.view.mainFragment.ChatFragment
-import com.example.studymatetwo.view.mainFragment.MentorSearchFragment
 import com.example.studymatetwo.view.mainFragment.MyPageFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,18 +19,16 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        loadFragment(MentorSearchFragment())
+        loadFragment(BoardFragment())
 
         binding.bottomNav.setOnItemSelectedListener {
             handleBottomNavigation(it.itemId)
         }
-
     }
 
     private fun handleBottomNavigation(itemId: Int): Boolean {
         val fragment = when (itemId) {
-            R.id.searchMentor -> MentorSearchFragment()
-            R.id.chat -> ChatFragment() // 각 메뉴에 맞는 프래그먼트로 수정
+            R.id.chat -> ChatFragment()
             R.id.board -> BoardFragment()
             R.id.myPage -> MyPageFragment()
             else -> null

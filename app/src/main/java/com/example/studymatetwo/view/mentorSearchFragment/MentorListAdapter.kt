@@ -10,6 +10,15 @@ import com.example.studymatetwo.dto.MentorDto
 class MentorListAdapter() : RecyclerView.Adapter<MentorListAdapter.MyView>() {
     private var mentorList: List<MentorDto> = emptyList()
 
+    interface OnItemClickListener {
+        fun onButtonClick(item: MentorDto)
+    }
+    private var listener : OnItemClickListener? = null
+
+    fun setOnItemClickListener(listener : OnItemClickListener) {
+        this.listener = listener
+    }
+
     @SuppressLint("NotifyDataSetChanged")
     fun setList(list: List<MentorDto>){
         mentorList=list
@@ -17,8 +26,12 @@ class MentorListAdapter() : RecyclerView.Adapter<MentorListAdapter.MyView>() {
     }
 
     inner class MyView(private val binding: MentorListItemBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(pos: Int){
-            binding.name.text = mentorList[pos].name
+        fun bind(item: MentorDto){
+            binding.name.text = item.name
+
+            binding.matchingBtn.setOnClickListener {
+                listener?.onButtonClick(item)
+            }
         }
     }
 
@@ -27,8 +40,8 @@ class MentorListAdapter() : RecyclerView.Adapter<MentorListAdapter.MyView>() {
         return MyView(view)
     }
 
-    override fun onBindViewHolder(holder: MentorListAdapter.MyView, position: Int) {
-        holder.bind(position)
+    override fun onBindViewHolder(holder: MyView, position: Int) {
+        holder.bind(mentorList[position])
     }
 
     override fun getItemCount(): Int {

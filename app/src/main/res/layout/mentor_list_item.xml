@@ -11,7 +11,7 @@
         android:orientation="horizontal">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/mentoImg"
+            android:id="@+id/mentorImg"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@android:color/transparent"
