@@ -20,6 +20,9 @@ class MentorSearchViewModel @Inject constructor(private val repository: MentorSe
     private val _progressBarValue = MutableLiveData<Int>(1)
     val progressBarValue: LiveData<Int> get() = _progressBarValue
 
+    private val _postChatRoomResult = MutableLiveData<ApiResponse<String>>()
+    val postChatRoomResult: LiveData<ApiResponse<String>> get() = _postChatRoomResult
+
     private val _postMenteeQuestionResult = MutableLiveData<ApiResponse<MenteeQuestionResponseDto>>()
     val postMenteeQuestionResult: LiveData<ApiResponse<MenteeQuestionResponseDto>> get() = _postMenteeQuestionResult
 
@@ -55,6 +58,12 @@ class MentorSearchViewModel @Inject constructor(private val repository: MentorSe
         }
     }
 
+    fun postChatRoom(userToken : String, name: String){
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = repository.postChatRoom(userToken,name)
+            _postChatRoomResult.postValue(response)
+        }
+    }
 
     private fun validateQuestionModel(model: MenteeQuestionDto): Boolean {
         return model.title.isNotBlank() &&
@@ -68,6 +77,7 @@ class MentorSearchViewModel @Inject constructor(private val repository: MentorSe
 
     fun nextCursor() {
         val currentCursor = _cursor.value ?: 1
+
         if (currentCursor + 1 == lastCursor) {
             _nextBtnText.value = "멘토검색"
         } else {

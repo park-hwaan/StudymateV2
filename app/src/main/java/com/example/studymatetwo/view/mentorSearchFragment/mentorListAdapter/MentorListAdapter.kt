@@ -1,4 +1,4 @@
-package com.example.studymatetwo.view.mentorSearchFragment
+package com.example.studymatetwo.view.mentorSearchFragment.mentorListAdapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -35,7 +35,7 @@ class MentorListAdapter() : RecyclerView.Adapter<MentorListAdapter.MyView>() {
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MentorListAdapter.MyView {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyView {
         val view = MentorListItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return MyView(view)
     }

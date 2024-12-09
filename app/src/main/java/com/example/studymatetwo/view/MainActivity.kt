@@ -6,12 +6,14 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.example.studymatetwo.R
 import com.example.studymatetwo.api.ApiResponse
 import com.example.studymatetwo.databinding.ActivityMainBinding
 import com.example.studymatetwo.dto.SignInDto
 import com.example.studymatetwo.viewmodel.SignViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -42,14 +44,17 @@ class MainActivity : AppCompatActivity() {
             when (response) {
                 is ApiResponse.Success -> {
                     Toast.makeText(this, "로그인 성공!", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, MentorSearchActivity::class.java)
-                    startActivity(intent)
+
+                    lifecycleScope.launch {
+                        kotlinx.coroutines.delay(1000)
+                        val intent = Intent(this@MainActivity, MentorSearchActivity::class.java)
+                        startActivity(intent)
+                    }
                 }
                 is ApiResponse.Error -> {
                     Toast.makeText(this, "로그인 실패: 비밀번호와 아이디를 확인해주세요", Toast.LENGTH_SHORT).show()
                 }
                 is ApiResponse.Loading -> {
-                    // 로딩 처리
                     Toast.makeText(this, "로그인 중...", Toast.LENGTH_SHORT).show()
                 }
             }

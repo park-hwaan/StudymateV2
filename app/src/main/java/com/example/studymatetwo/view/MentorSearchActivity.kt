@@ -54,7 +54,6 @@ class MentorSearchActivity : AppCompatActivity() {
             finish()
         }
 
-        // 뒤로가기 이미지 클릭 이벤트
         binding.backImg.setOnClickListener {
             if(viewModel.cursor.value!! > 1){
                 supportFragmentManager.popBackStack()
@@ -140,7 +139,7 @@ class MentorSearchActivity : AppCompatActivity() {
                     viewModel.getMentorList("Bearer $userToken", questionId)
                 }
                 is ApiResponse.Error -> {
-                    Toast.makeText(this, "입력 내용을 확인해주세요ㅂㅈ!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "입력 내용을 확인해주세요!", Toast.LENGTH_SHORT).show()
                 }
             }
         })

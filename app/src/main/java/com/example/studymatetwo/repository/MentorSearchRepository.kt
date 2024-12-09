@@ -48,4 +48,18 @@ class MentorSearchRepository @Inject constructor(private val apiService: ApiServ
             emptyList()
         }
     }
+
+    @Singleton
+    suspend fun postChatRoom(userToken: String, name: String) : ApiResponse<String> {
+        return try {
+            val response = apiService.postChatroom(userToken, name)
+            ApiResponse.Success(response)
+        } catch (e: HttpException) {
+            ApiResponse.Error(e.message ?: "HTTP 오류 발생")
+        } catch (e: IOException) {
+            ApiResponse.Error(e.message ?: "네트워크 오류 발생")
+        } catch (e: IllegalStateException) {
+            ApiResponse.Error(e.message ?: "알 수 없는 오류 발생")
+        }
+    }
 }
