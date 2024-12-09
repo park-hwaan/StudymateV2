@@ -50,4 +50,9 @@ interface ApiService {
         @Query("name") name: String
     ) : String
 
+    @GET("api/chat/rooms")
+    suspend fun getChatRoomList(
+        @Header("Authorization") authorization: String
+    ) : List<ChatRoomDto>
+
 }
