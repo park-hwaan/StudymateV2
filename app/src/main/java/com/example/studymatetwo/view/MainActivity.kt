@@ -49,6 +49,9 @@ class MainActivity : AppCompatActivity() {
                         kotlinx.coroutines.delay(1000)
                         val intent = Intent(this@MainActivity, MentorSearchActivity::class.java)
                         startActivity(intent)
+
+                        binding.editEmail.text = null
+                        binding.editPassword.text = null
                     }
                 }
                 is ApiResponse.Error -> {

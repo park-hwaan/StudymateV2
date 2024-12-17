@@ -46,7 +46,7 @@ class MentorListFragment : Fragment() {
 
         mentorListAdapter.setOnItemClickListener(object : MentorListAdapter.OnItemClickListener {
             override fun onButtonClick(item: MentorDto) {
-                viewModel.postChatRoom("Bearer $userToken","parkhwan")
+                viewModel.postChatRoom("Bearer $userToken",item.name)
                 val intent = Intent(requireContext(), HomeActivity::class.java)
                 startActivity(intent)
             }

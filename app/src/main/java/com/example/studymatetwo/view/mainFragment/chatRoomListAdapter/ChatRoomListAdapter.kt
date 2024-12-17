@@ -13,6 +13,15 @@ import com.example.studymatetwo.view.mentorSearchFragment.mentorListAdapter.Ment
 class ChatRoomListAdapter() : RecyclerView.Adapter<ChatRoomListAdapter.MyView>()  {
     private var chatRoomList: List<ChatRoomDto> = emptyList()
 
+    interface OnItemClickListener {
+        fun onItemClick(item: ChatRoomDto)
+    }
+    private var listener : OnItemClickListener? = null
+
+    fun setOnItemClickListener(listener : OnItemClickListener) {
+        this.listener = listener
+    }
+
     @SuppressLint("NotifyDataSetChanged")
     fun setList(list: List<ChatRoomDto>){
         chatRoomList=list
@@ -22,6 +31,9 @@ class ChatRoomListAdapter() : RecyclerView.Adapter<ChatRoomListAdapter.MyView>()
     inner class MyView(private val binding: ChatRoomListItemBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(item: ChatRoomDto){
             binding.name.text = item.name
+            binding.root.setOnClickListener {
+                listener?.onItemClick(item)
+            }
 
         }
     }

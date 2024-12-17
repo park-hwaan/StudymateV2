@@ -36,10 +36,13 @@ class MyPageFragment : Fragment() {
     }
     private fun getMyInfo(){
         viewModel.myInfoData.observe(viewLifecycleOwner, Observer {
-            Log.d("myInfo",it.data.toString())
             binding.reviewCount.text = it.data!!.reviewCount.toString()
             binding.matchingCount.text = it.data.matchingCount.toString()
             binding.nameText.text = it.data.name
+
+            val editor = sharedPreferences.edit()
+            editor.putString("name", it.data.name)
+            editor.apply()
 
         })
     }

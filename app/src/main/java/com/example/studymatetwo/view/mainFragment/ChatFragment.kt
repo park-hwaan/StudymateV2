@@ -1,6 +1,7 @@
 package com.example.studymatetwo.view.mainFragment
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
@@ -17,6 +18,8 @@ import com.example.studymatetwo.api.ApiResponse
 import com.example.studymatetwo.databinding.FragmentChatBinding
 import com.example.studymatetwo.databinding.FragmentMypageBinding
 import com.example.studymatetwo.dto.ChatRoomDto
+import com.example.studymatetwo.view.ChatRoomActivity
+import com.example.studymatetwo.view.HomeActivity
 import com.example.studymatetwo.view.mainFragment.chatRoomListAdapter.ChatRoomListAdapter
 import com.example.studymatetwo.view.mentorSearchFragment.mentorListAdapter.MentorListAdapter
 import com.example.studymatetwo.viewmodel.ChatViewModel
@@ -46,12 +49,21 @@ class ChatFragment : Fragment() {
         viewModel.getMentorList("Bearer $userToken")
         observerChatRoom()
 
+       chatRoomListAdapter.setOnItemClickListener(object : ChatRoomListAdapter.OnItemClickListener{
+           override fun onItemClick(item: ChatRoomDto) {
+               val intent = Intent(requireContext(), ChatRoomActivity::class.java)
+               val roomId = item.roomId
+               intent.putExtra("roomId",roomId)
+               startActivity(intent)
+           }
+
+       })
+
         return binding.root
     }
 
     private fun observerChatRoom(){
         viewModel.chatRoomList.observe(viewLifecycleOwner, Observer { response ->
-            Log.d("ChatFragment","$response")
             chatRoomListAdapter.setList(response)
         })
     }
