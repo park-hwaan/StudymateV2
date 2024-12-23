@@ -12,6 +12,7 @@ class MentorListAdapter() : RecyclerView.Adapter<MentorListAdapter.MyView>() {
 
     interface OnItemClickListener {
         fun onButtonClick(item: MentorDto)
+        fun onImageClick(item : MentorDto)
     }
     private var listener : OnItemClickListener? = null
 
@@ -28,6 +29,9 @@ class MentorListAdapter() : RecyclerView.Adapter<MentorListAdapter.MyView>() {
     inner class MyView(private val binding: MentorListItemBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(item: MentorDto){
             binding.name.text = item.name
+            binding.mentorImg.setOnClickListener {
+                listener?.onImageClick(item)
+            }
 
             binding.matchingBtn.setOnClickListener {
                 listener?.onButtonClick(item)

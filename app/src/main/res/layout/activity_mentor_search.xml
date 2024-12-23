@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="35dp"
-    tools:context=".view.MentorSearchActivity">
+    tools:context=".view.mentorSearchFragment.MentorSearchActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

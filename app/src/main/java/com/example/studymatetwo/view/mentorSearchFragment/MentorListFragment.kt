@@ -50,6 +50,10 @@ class MentorListFragment : Fragment() {
                 val intent = Intent(requireContext(), HomeActivity::class.java)
                 startActivity(intent)
             }
+
+            override fun onImageClick(item: MentorDto) {
+
+            }
         })
 
         observerChatRoom()

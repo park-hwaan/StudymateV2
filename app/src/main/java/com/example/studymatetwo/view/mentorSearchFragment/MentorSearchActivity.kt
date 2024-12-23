@@ -1,4 +1,4 @@
-package com.example.studymatetwo.view
+package com.example.studymatetwo.view.mentorSearchFragment
 
 import android.content.Context
 import android.content.Intent
@@ -15,11 +15,7 @@ import com.example.studymatetwo.R
 import com.example.studymatetwo.api.ApiResponse
 import com.example.studymatetwo.databinding.ActivityMentorSearchBinding
 import com.example.studymatetwo.dto.MenteeQuestionDto
-import com.example.studymatetwo.dto.SignUpDto
-import com.example.studymatetwo.view.mentorSearchFragment.MentorListFragment
-import com.example.studymatetwo.view.mentorSearchFragment.QuestionContentFragment
-import com.example.studymatetwo.view.mentorSearchFragment.QuestionInterestFragment
-import com.example.studymatetwo.view.signUpFragment.*
+import com.example.studymatetwo.view.HomeActivity
 import com.example.studymatetwo.viewmodel.MentorSearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject

@@ -62,5 +62,12 @@
     <string name="title">제목</string>
     <string name="content">질문내용</string>
 
+    boardFragment
+    ----------------------------------------------------------------------------------------------------
+    <string name="free">자유게시판</string>
+    <string name="question">질문게시판</string>
+    <string name="study">스터디게시판</string>
+    <string name="my_board">내가 쓴 글</string>
+    <string name="my_heart">내가 좋아요한 게시글</string>
 
 </resources>

@@ -7,10 +7,10 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import com.example.studymatetwo.R
 import com.example.studymatetwo.api.ApiResponse
 import com.example.studymatetwo.databinding.ActivityMainBinding
 import com.example.studymatetwo.dto.SignInDto
+import com.example.studymatetwo.view.mentorSearchFragment.MentorSearchActivity
 import com.example.studymatetwo.viewmodel.SignViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch

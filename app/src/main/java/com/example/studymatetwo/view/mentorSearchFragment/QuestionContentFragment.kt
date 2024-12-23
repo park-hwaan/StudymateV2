@@ -5,10 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.studymatetwo.R
-import com.example.studymatetwo.databinding.FragmentMajorPartBinding
 import com.example.studymatetwo.databinding.FragmentQuestionContentBinding
-import com.example.studymatetwo.view.MentorSearchActivity
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
 @AndroidEntryPoint
