@@ -16,10 +16,10 @@
         android:theme="@style/Theme.StudyMateTwo"
         tools:targetApi="31">
         <activity
-            android:name=".view.BoardListActivity"
+            android:name=".view.board.BoardListActivity"
             android:exported="false" />
         <activity
-            android:name=".view.ChatRoomActivity"
+            android:name=".view.chat.ChatRoomActivity"
             android:exported="false" />
         <activity
             android:name=".view.mentorSearchFragment.MentorSearchActivity"

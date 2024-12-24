@@ -55,4 +55,8 @@ interface ApiService {
         @Header("Authorization") authorization: String
     ) : List<ChatRoomDto>
 
+    @GET("api/posts")
+    suspend fun getBoardList(
+        @Header("Authorization") authorization: String
+    ) : List<BoardDto>
 }

@@ -1,18 +1,13 @@
-package com.example.studymatetwo.view.mainFragment
+package com.example.studymatetwo.view.board
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import com.example.studymatetwo.R
 import com.example.studymatetwo.databinding.FragmentBoardBinding
-import com.example.studymatetwo.databinding.FragmentMypageBinding
-import com.example.studymatetwo.view.BoardListActivity
 
 class BoardFragment : Fragment() {
     lateinit var binding : FragmentBoardBinding
@@ -25,9 +20,9 @@ class BoardFragment : Fragment() {
         // 클릭 이벤트를 처리하는 공통 리스너
         val clickListener = View.OnClickListener { view ->
             val destination = when (view.id) {
-                R.id.freeText -> "Free"
-                R.id.studyText -> "Study"
-                R.id.quesText -> "Ques"
+                R.id.freeText -> "FREE"
+                R.id.studyText -> "STUDY"
+                R.id.quesText -> "QUESTION"
                 else -> ""
             }
             navigateToActivity(destination)

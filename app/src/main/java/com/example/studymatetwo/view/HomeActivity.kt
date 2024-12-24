@@ -5,9 +5,9 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.studymatetwo.R
 import com.example.studymatetwo.databinding.ActivityHomeBinding
-import com.example.studymatetwo.view.mainFragment.BoardFragment
-import com.example.studymatetwo.view.mainFragment.ChatFragment
-import com.example.studymatetwo.view.mainFragment.MyPageFragment
+import com.example.studymatetwo.view.board.BoardFragment
+import com.example.studymatetwo.view.chat.ChatFragment
+import com.example.studymatetwo.view.myPage.MyPageFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

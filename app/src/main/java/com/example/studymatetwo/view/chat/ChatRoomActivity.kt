@@ -1,4 +1,4 @@
-package com.example.studymatetwo.view
+package com.example.studymatetwo.view.chat
 
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
@@ -8,9 +8,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.studymatetwo.ChatMessageAdapter
 import com.example.studymatetwo.databinding.ActivityChatRoomBinding
-import com.example.studymatetwo.databinding.ActivityHomeBinding
 import com.example.studymatetwo.dto.MessageDto
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONException

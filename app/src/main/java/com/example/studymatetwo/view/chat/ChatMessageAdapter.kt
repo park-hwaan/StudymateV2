@@ -1,4 +1,4 @@
-package com.example.studymatetwo
+package com.example.studymatetwo.view.chat
 
 import android.util.Log
 import android.view.LayoutInflater

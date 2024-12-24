@@ -1,14 +1,11 @@
-package com.example.studymatetwo.view.mainFragment.chatRoomListAdapter
+package com.example.studymatetwo.view.chat
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.studymatetwo.databinding.ChatRoomListItemBinding
-import com.example.studymatetwo.databinding.MentorListItemBinding
 import com.example.studymatetwo.dto.ChatRoomDto
-import com.example.studymatetwo.dto.MentorDto
-import com.example.studymatetwo.view.mentorSearchFragment.mentorListAdapter.MentorListAdapter
 
 class ChatRoomListAdapter() : RecyclerView.Adapter<ChatRoomListAdapter.MyView>()  {
     private var chatRoomList: List<ChatRoomDto> = emptyList()
@@ -38,7 +35,7 @@ class ChatRoomListAdapter() : RecyclerView.Adapter<ChatRoomListAdapter.MyView>()
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatRoomListAdapter.MyView {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyView {
         val view = ChatRoomListItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return MyView(view)
     }
