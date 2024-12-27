@@ -3,6 +3,7 @@ package com.example.studymatetwo.view.board
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -27,24 +28,10 @@ class BoardListActivity : AppCompatActivity() {
         binding = ActivityBoardListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE)
-        userToken = sharedPreferences.getString("userToken", "") ?: ""
+        val boardId = intent.getStringExtra("boardId").toString()
+        Log.d("BoardListActivity",boardId)
 
-        boardCategory = intent.getStringExtra("boardCategory").toString()
-
-        boardListAdapter = BoardListAdapter()
-        binding.recycle.layoutManager = LinearLayoutManager(this)
-        binding.recycle.adapter = boardListAdapter
-
-        viewModel.getBoardList("Bearer $userToken")
-
-        observerBoardList(boardCategory)
     }
 
-    private fun observerBoardList(category: String){
-        viewModel.boardList.observe(this, Observer { response ->
-            val filterBoardList =response?.filter { it.category == category } ?: emptyList()
-            boardListAdapter.setList(filterBoardList)
-        })
-    }
+
 }

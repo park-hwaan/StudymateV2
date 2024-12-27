@@ -7,10 +7,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.studymatetwo.databinding.BoardListItemBinding
 import com.example.studymatetwo.databinding.MentorListItemBinding
 import com.example.studymatetwo.dto.BoardDto
+import com.example.studymatetwo.dto.ChatRoomDto
 import com.example.studymatetwo.dto.MentorDto
+import com.example.studymatetwo.view.mentorSearchFragment.mentorListAdapter.MentorListAdapter
 
 class BoardListAdapter() : RecyclerView.Adapter<BoardListAdapter.MyView>() {
     private var boardList:  List<BoardDto> = emptyList()
+
+    interface OnItemClickListener {
+        fun onItemClick(item: BoardDto)
+    }
+
+    private var listener : BoardListAdapter.OnItemClickListener? = null
+
+    fun setOnItemClickListener(listener : BoardListAdapter.OnItemClickListener) {
+        this.listener = listener
+    }
 
     inner class MyView(private val binding: BoardListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
@@ -18,6 +30,9 @@ class BoardListAdapter() : RecyclerView.Adapter<BoardListAdapter.MyView>() {
             binding.titleText.text = boardModel.title
             binding.dateText.text = boardModel.createdAt
             binding.nicknameText.text = boardModel.nickname
+            binding.root.setOnClickListener {
+                listener?.onItemClick(boardModel)
+            }
         }
     }
 
