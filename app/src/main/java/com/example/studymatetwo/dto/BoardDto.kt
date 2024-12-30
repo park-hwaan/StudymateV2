@@ -10,6 +10,5 @@ data class BoardDto (
     var interests: String,
     var recruitmentStatus : String,
     var likeCount : Int,
-    var commentCount : Int,
-    var profileUrl : String
+    var commentCount : Int
         )

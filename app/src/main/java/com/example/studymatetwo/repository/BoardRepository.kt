@@ -1,5 +1,6 @@
 package com.example.studymatetwo.repository
 
+import com.example.studymatetwo.api.ApiResponse
 import com.example.studymatetwo.api.ApiService
 import com.example.studymatetwo.dto.BoardDto
 import dagger.Module
@@ -25,6 +26,20 @@ class BoardRepository @Inject constructor(private val apiService: ApiService) {
             emptyList()
         } catch (e: IllegalStateException) {
             emptyList()
+        }
+    }
+
+    @Singleton
+    suspend fun getBoardContent(userToken: String, boardId: String) : ApiResponse<BoardDto>{
+        return try{
+            val response = apiService.getBoardContent(userToken,boardId)
+            ApiResponse.Success(response)
+        }catch (e: HttpException) {
+            ApiResponse.Error(e.message ?: "HTTP 오류 발생")
+        } catch (e: IOException) {
+            ApiResponse.Error(e.message ?: "HTTP 오류 발생")
+        } catch (e: IllegalStateException) {
+            ApiResponse.Error(e.message ?: "HTTP 오류 발생")
         }
     }
 }

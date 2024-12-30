@@ -16,7 +16,7 @@
         android:theme="@style/Theme.StudyMateTwo"
         tools:targetApi="31">
         <activity
-            android:name=".view.board.BoardListActivity"
+            android:name=".view.board.BoardInsideActivity"
             android:exported="false" />
         <activity
             android:name=".view.chat.ChatRoomActivity"

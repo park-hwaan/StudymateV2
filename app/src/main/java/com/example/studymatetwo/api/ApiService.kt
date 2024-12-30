@@ -59,4 +59,10 @@ interface ApiService {
     suspend fun getBoardList(
         @Header("Authorization") authorization: String
     ) : List<BoardDto>
+
+    @GET("api/posts/{post_id}")
+    suspend fun getBoardContent(
+        @Header("Authorization") authorization: String,
+        @Path("post_id") postId : String
+    ) : BoardDto
 }
