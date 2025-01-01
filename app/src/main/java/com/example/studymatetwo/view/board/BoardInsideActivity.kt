@@ -45,6 +45,8 @@ class BoardInsideActivity : AppCompatActivity() {
             binding.titleText.text = it.data.title
             binding.contentText.text = it.data.content
             binding.categoryText.text = it.data.category
+            binding.heartAmountText.text = it.data.likeCount.toString()
+            binding.commentAmountText.text = it.data.commentCount.toString()
 
 
         })
