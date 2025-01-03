@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.studymatetwo.api.ApiResponse
 import com.example.studymatetwo.dto.BoardDto
+import com.example.studymatetwo.dto.CommentDto
 import com.example.studymatetwo.dto.MentorDto
 import com.example.studymatetwo.repository.BoardRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,6 +22,9 @@ class BoardViewModel @Inject constructor(private val repository: BoardRepository
     private var _mutableBoardContent = MutableLiveData<ApiResponse<BoardDto>>()
     val boardContent: LiveData<ApiResponse<BoardDto>> get() = _mutableBoardContent
 
+    private var _mutableBoardComment = MutableLiveData<ApiResponse<String>>()
+    val boardComment: LiveData<ApiResponse<String>> get() = _mutableBoardComment
+
     fun getBoardList(userToken: String){
         viewModelScope.launch(Dispatchers.IO) {
             val response = repository.getBoardList(userToken)
@@ -32,6 +36,13 @@ class BoardViewModel @Inject constructor(private val repository: BoardRepository
         viewModelScope.launch(Dispatchers.IO) {
             val response = repository.getBoardContent(userToken, boardId)
             _mutableBoardContent.postValue(response)
+        }
+    }
+
+    fun postBoardComment(userToken: String, boardId: String, commentDto: CommentDto){
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = repository.postBoardComment(userToken, boardId, commentDto)
+            _mutableBoardComment.postValue(response)
         }
     }
 

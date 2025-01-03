@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.example.studymatetwo.R
 import com.example.studymatetwo.databinding.ActivityBoardInsideBinding
+import com.example.studymatetwo.dto.CommentDto
 import com.example.studymatetwo.viewmodel.BoardViewModel
 import com.example.studymatetwo.viewmodel.SignViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,6 +21,7 @@ class BoardInsideActivity : AppCompatActivity() {
     private lateinit var boardId : String
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var userToken: String
+    private lateinit var commentDto: CommentDto
     private val viewModel: BoardViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +34,12 @@ class BoardInsideActivity : AppCompatActivity() {
 
         boardId = intent.getStringExtra("boardId").toString()
         Log.d("BoardInsideActivity", boardId)
+
+        binding.sendBtn.setOnClickListener {
+            commentDto = CommentDto(binding.editComment.text.toString())
+            viewModel.postBoardComment("Bearer $userToken", boardId, commentDto)
+            binding.editComment.text = null
+        }
 
         viewModel.getBoardContent("Bearer $userToken", boardId)
 
@@ -59,6 +67,7 @@ class BoardInsideActivity : AppCompatActivity() {
            "FREE" -> "자유게시판"
            else -> ""
        }
-
    }
+
+
 }

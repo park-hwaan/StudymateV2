@@ -65,4 +65,11 @@ interface ApiService {
         @Header("Authorization") authorization: String,
         @Path("post_id") postId : String
     ) : BoardDto
+
+    @POST("api/posts/{post_id}/comments")
+    suspend fun postBoardComment(
+        @Header("Authorization") authorization: String,
+        @Path("post_id") postId : String,
+        @Body commentDto : CommentDto
+    ) : String
 }
