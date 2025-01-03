@@ -34,4 +34,5 @@ class BoardViewModel @Inject constructor(private val repository: BoardRepository
             _mutableBoardContent.postValue(response)
         }
     }
+
 }
