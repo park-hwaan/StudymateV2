@@ -6,13 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import com.example.studymatetwo.R
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.studymatetwo.databinding.ActivityBoardInsideBinding
-import com.example.studymatetwo.dto.CommentDto
+import com.example.studymatetwo.dto.CommentContentDto
 import com.example.studymatetwo.viewmodel.BoardViewModel
-import com.example.studymatetwo.viewmodel.SignViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,7 +19,8 @@ class BoardInsideActivity : AppCompatActivity() {
     private lateinit var boardId : String
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var userToken: String
-    private lateinit var commentDto: CommentDto
+    private lateinit var commentContentDto: CommentContentDto
+    private lateinit var commentListAdapter: BoardCommentListAdapter
     private val viewModel: BoardViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,18 +31,25 @@ class BoardInsideActivity : AppCompatActivity() {
         sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         userToken = sharedPreferences.getString("userToken", "").toString()
 
+        commentListAdapter = BoardCommentListAdapter()
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.adapter = commentListAdapter
+
         boardId = intent.getStringExtra("boardId").toString()
         Log.d("BoardInsideActivity", boardId)
 
         binding.sendBtn.setOnClickListener {
-            commentDto = CommentDto(binding.editComment.text.toString())
-            viewModel.postBoardComment("Bearer $userToken", boardId, commentDto)
+            commentContentDto = CommentContentDto(binding.editComment.text.toString())
+            viewModel.postBoardComment("Bearer $userToken", boardId, commentContentDto)
             binding.editComment.text = null
         }
 
         viewModel.getBoardContent("Bearer $userToken", boardId)
 
         observeBoardContent()
+
+        viewModel.getCommentList("Bearer $userToken", boardId)
+        observerCommentList()
     }
 
     private fun observeBoardContent(){
@@ -68,6 +74,12 @@ class BoardInsideActivity : AppCompatActivity() {
            else -> ""
        }
    }
+
+    private fun observerCommentList(){
+        viewModel.commentList.observe(this, Observer {
+            commentListAdapter.setList(it)
+        })
+    }
 
 
 }

@@ -70,6 +70,12 @@ interface ApiService {
     suspend fun postBoardComment(
         @Header("Authorization") authorization: String,
         @Path("post_id") postId : String,
-        @Body commentDto : CommentDto
+        @Body commentContentDto : CommentContentDto
     ) : String
+
+    @GET("api/posts/{post_id}/comments")
+    suspend fun getCommentList(
+        @Header("Authorization") authorization: String,
+        @Path("post_id") postId : String
+    ) : List<CommentDto>
 }

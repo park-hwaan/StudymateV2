@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.studymatetwo.api.ApiResponse
 import com.example.studymatetwo.dto.BoardDto
+import com.example.studymatetwo.dto.CommentContentDto
 import com.example.studymatetwo.dto.CommentDto
-import com.example.studymatetwo.dto.MentorDto
 import com.example.studymatetwo.repository.BoardRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -21,6 +21,9 @@ class BoardViewModel @Inject constructor(private val repository: BoardRepository
 
     private var _mutableBoardContent = MutableLiveData<ApiResponse<BoardDto>>()
     val boardContent: LiveData<ApiResponse<BoardDto>> get() = _mutableBoardContent
+
+    private var _mutableCommentList = MutableLiveData<List<CommentDto>>(emptyList())
+    val commentList: LiveData<List<CommentDto>> get() = _mutableCommentList
 
     private var _mutableBoardComment = MutableLiveData<ApiResponse<String>>()
     val boardComment: LiveData<ApiResponse<String>> get() = _mutableBoardComment
@@ -39,10 +42,17 @@ class BoardViewModel @Inject constructor(private val repository: BoardRepository
         }
     }
 
-    fun postBoardComment(userToken: String, boardId: String, commentDto: CommentDto){
+    fun postBoardComment(userToken: String, boardId: String, commentContentDto: CommentContentDto){
         viewModelScope.launch(Dispatchers.IO) {
-            val response = repository.postBoardComment(userToken, boardId, commentDto)
+            val response = repository.postBoardComment(userToken, boardId, commentContentDto)
             _mutableBoardComment.postValue(response)
+        }
+    }
+
+    fun getCommentList(userToken: String, boardId: String){
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = repository.getCommentList(userToken, boardId)
+            _mutableCommentList.postValue(response)
         }
     }
 

@@ -3,6 +3,7 @@ package com.example.studymatetwo.repository
 import com.example.studymatetwo.api.ApiResponse
 import com.example.studymatetwo.api.ApiService
 import com.example.studymatetwo.dto.BoardDto
+import com.example.studymatetwo.dto.CommentContentDto
 import com.example.studymatetwo.dto.CommentDto
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -45,9 +46,9 @@ class BoardRepository @Inject constructor(private val apiService: ApiService) {
     }
 
     @Singleton
-    suspend fun postBoardComment(userToken: String, boardId: String, commentDto: CommentDto): ApiResponse<String>{
+    suspend fun postBoardComment(userToken: String, boardId: String, commentContentDto: CommentContentDto): ApiResponse<String>{
         return try{
-            val response = apiService.postBoardComment(userToken,boardId, commentDto)
+            val response = apiService.postBoardComment(userToken,boardId, commentContentDto)
             ApiResponse.Success(response)
         }catch (e: HttpException) {
             ApiResponse.Error(e.message ?: "HTTP 오류 발생")
@@ -55,6 +56,20 @@ class BoardRepository @Inject constructor(private val apiService: ApiService) {
             ApiResponse.Error(e.message ?: "HTTP 오류 발생")
         } catch (e: IllegalStateException) {
             ApiResponse.Error(e.message ?: "HTTP 오류 발생")
+        }
+    }
+
+    @Singleton
+    suspend fun getCommentList(userToken: String, boardId: String) : List<CommentDto>{
+        return try{
+            val response = apiService.getCommentList(userToken, boardId)
+            response
+        }catch (e: HttpException) {
+            emptyList()
+        } catch (e: IOException) {
+            emptyList()
+        } catch (e: IllegalStateException) {
+            emptyList()
         }
     }
 }
