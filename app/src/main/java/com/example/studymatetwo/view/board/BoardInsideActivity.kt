@@ -44,6 +44,11 @@ class BoardInsideActivity : AppCompatActivity() {
             binding.editComment.text = null
         }
 
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            viewModel.getCommentList("Bearer $userToken", boardId)
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
+
         viewModel.getBoardContent("Bearer $userToken", boardId)
 
         observeBoardContent()
@@ -80,6 +85,4 @@ class BoardInsideActivity : AppCompatActivity() {
             commentListAdapter.setList(it)
         })
     }
-
-
 }
