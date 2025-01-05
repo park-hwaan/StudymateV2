@@ -27,8 +27,11 @@
         <item name="android:dividerHeight">1dp</item> <!-- divider 높이 -->
     </style>
 
-    <style name="SpinnerTheme">
-        <item name="android:dropDownListViewStyle">@style/SpinnerDivideStyle</item>
+
+    <style name="tab_text" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
     </style>
+
 
 </resources>
