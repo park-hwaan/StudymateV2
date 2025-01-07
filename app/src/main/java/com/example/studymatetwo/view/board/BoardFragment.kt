@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.studymatetwo.databinding.FragmentBoardBinding
 import com.example.studymatetwo.dto.BoardDto
 import com.example.studymatetwo.viewmodel.BoardViewModel
+import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -49,7 +50,23 @@ class BoardFragment : Fragment() {
 
         viewModel.getBoardList("Bearer $userToken")
 
-        observerBoardList("STUDY")
+        binding.tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                when(tab!!.position){
+                    0 ->observerBoardList("FREE")
+                    1 -> observerBoardList("QUESTION")
+                    2 -> observerBoardList("STUDY")
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+               observerBoardList("FREE")
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+            }
+
+        })
 
         return binding.root
     }
