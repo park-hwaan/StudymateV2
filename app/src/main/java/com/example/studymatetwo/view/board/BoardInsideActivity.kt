@@ -50,7 +50,6 @@ class BoardInsideActivity : AppCompatActivity() {
         }
 
         viewModel.getBoardContent("Bearer $userToken", boardId)
-
         observeBoardContent()
 
         viewModel.getCommentList("Bearer $userToken", boardId)
