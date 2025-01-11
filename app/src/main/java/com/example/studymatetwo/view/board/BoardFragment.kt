@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -69,6 +70,9 @@ class BoardFragment : Fragment() {
 
         })
 
+        observerBoardSearchList()
+        initSearchView()
+
         onRefresh()
 
         return binding.root
@@ -92,6 +96,27 @@ class BoardFragment : Fragment() {
             observerBoardList(category)
             binding.swipeRefreshLayout.isRefreshing = false
         }
+    }
+
+    private fun initSearchView() {
+        binding.searchView.isSubmitButtonEnabled = true
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean { //검색을 완료하였을 경우 (키보드에 있는 '검색' 돋보기 버튼을 선택하였을 경우)
+                query?.let { viewModel.getBoardSearch("Bearer $userToken",it) }
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean { //검색어를 변경할 때마다 실행됨
+                newText?.let { viewModel.getBoardSearch("Bearer $userToken",it) }
+                return true
+            }
+        })
+    }
+
+    private fun observerBoardSearchList(){
+        viewModel.boardSearchList.observe(viewLifecycleOwner, Observer { response ->
+            boardListAdapter.setList(response)
+        })
     }
 
 }

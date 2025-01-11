@@ -78,4 +78,10 @@ interface ApiService {
         @Header("Authorization") authorization: String,
         @Path("post_id") postId : String
     ) : List<CommentDto>
+
+    @GET("api/posts/search")
+    suspend fun getBoardSearch(
+        @Header("Authorization") authorization: String,
+        @Query("keyword") keyword: String
+    ) : List<BoardDto>
 }

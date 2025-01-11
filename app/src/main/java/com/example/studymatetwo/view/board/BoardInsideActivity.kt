@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,6 +24,12 @@ class BoardInsideActivity : AppCompatActivity() {
     private lateinit var commentListAdapter: BoardCommentListAdapter
     private val viewModel: BoardViewModel by viewModels()
 
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+           finish()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBoardInsideBinding.inflate(layoutInflater)
@@ -30,6 +37,11 @@ class BoardInsideActivity : AppCompatActivity() {
 
         sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         userToken = sharedPreferences.getString("userToken", "").toString()
+
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
+        binding.backImg.setOnClickListener {
+            finish()
+        }
 
         commentListAdapter = BoardCommentListAdapter()
         binding.recyclerView.layoutManager = LinearLayoutManager(this)

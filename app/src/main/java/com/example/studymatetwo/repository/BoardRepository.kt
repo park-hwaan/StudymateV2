@@ -72,4 +72,18 @@ class BoardRepository @Inject constructor(private val apiService: ApiService) {
             emptyList()
         }
     }
+
+    @Singleton
+    suspend fun getBoardSearch(userToken: String, keyword: String) : List<BoardDto>{
+        return try{
+            val response = apiService.getBoardSearch(userToken, keyword)
+            response
+        }catch (e: HttpException) {
+            emptyList()
+        } catch (e: IOException) {
+            emptyList()
+        } catch (e: IllegalStateException) {
+            emptyList()
+        }
+    }
 }

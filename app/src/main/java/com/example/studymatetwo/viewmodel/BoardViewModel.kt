@@ -19,6 +19,9 @@ class BoardViewModel @Inject constructor(private val repository: BoardRepository
     private var _mutableBoardList = MutableLiveData<List<BoardDto>>(emptyList())
     val boardList: LiveData<List<BoardDto>> get() = _mutableBoardList
 
+    private var _mutableBoardSearchList = MutableLiveData<List<BoardDto>>(emptyList())
+    val boardSearchList: LiveData<List<BoardDto>> get() = _mutableBoardSearchList
+
     private var _mutableBoardContent = MutableLiveData<ApiResponse<BoardDto>>()
     val boardContent: LiveData<ApiResponse<BoardDto>> get() = _mutableBoardContent
 
@@ -53,6 +56,13 @@ class BoardViewModel @Inject constructor(private val repository: BoardRepository
         viewModelScope.launch(Dispatchers.IO) {
             val response = repository.getCommentList(userToken, boardId)
             _mutableCommentList.postValue(response)
+        }
+    }
+
+    fun getBoardSearch(userToken: String, keyword: String){
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = repository.getBoardSearch(userToken, keyword)
+            _mutableBoardSearchList.postValue(response)
         }
     }
 
