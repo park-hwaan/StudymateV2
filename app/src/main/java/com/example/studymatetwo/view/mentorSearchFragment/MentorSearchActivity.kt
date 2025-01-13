@@ -15,6 +15,7 @@ import com.example.studymatetwo.R
 import com.example.studymatetwo.api.ApiResponse
 import com.example.studymatetwo.databinding.ActivityMentorSearchBinding
 import com.example.studymatetwo.dto.MenteeQuestionDto
+import com.example.studymatetwo.util.IntroDialogUtil
 import com.example.studymatetwo.view.HomeActivity
 import com.example.studymatetwo.viewmodel.MentorSearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -60,6 +61,7 @@ class MentorSearchActivity : AppCompatActivity() {
         binding.nextBtn.setOnClickListener {
             if (viewModel.cursor.value!! <= fragmentList.size) {
                 if (viewModel.cursor.value == 3) {
+                    IntroDialogUtil.showIntroDialog(this)
                     viewModel.postMenteeQuestion("Bearer $userToken", viewModel.questionData.value ?: MenteeQuestionDto())
                     observerMentorList()
                     observerMentor()
