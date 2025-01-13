@@ -1,7 +1,5 @@
 package com.example.studymatetwo.viewmodel
 
-import android.content.Context
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,13 +10,14 @@ import com.example.studymatetwo.dto.SignInDto
 import com.example.studymatetwo.dto.SignInResponseDto
 import com.example.studymatetwo.dto.SignUpDto
 import com.example.studymatetwo.repository.SignRepository
+import com.example.studymatetwo.repositoryImpl.SignRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SignViewModel @Inject constructor(private val repository: SignRepository) : ViewModel()  {
+class SignViewModel @Inject constructor(private val repository: SignRepositoryImpl) : ViewModel()  {
 
     private val _myInfoData = MutableLiveData<ApiResponse<MyInfoDto>>()
     val myInfoData: LiveData<ApiResponse<MyInfoDto>> = _myInfoData

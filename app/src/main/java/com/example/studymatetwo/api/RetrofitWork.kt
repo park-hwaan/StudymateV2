@@ -1,5 +1,6 @@
 package com.example.studymatetwo.api
 
+import com.example.studymatetwo.error.ResultCallAdapterFactory
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -31,6 +32,7 @@ object RetrofitWork {
             .baseUrl(BASE_URL)
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))
+            .addCallAdapterFactory(ResultCallAdapterFactory.create())
             .client(okHttpClient)
             .build()
     }

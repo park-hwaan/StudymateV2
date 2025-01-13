@@ -1,6 +1,5 @@
 package com.example.studymatetwo.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,14 +7,14 @@ import androidx.lifecycle.viewModelScope
 import com.example.studymatetwo.api.ApiResponse
 import com.example.studymatetwo.dto.*
 import com.example.studymatetwo.repository.MentorSearchRepository
+import com.example.studymatetwo.repositoryImpl.MentorSearchRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class MentorSearchViewModel @Inject constructor(private val repository: MentorSearchRepository) : ViewModel() {
+class MentorSearchViewModel @Inject constructor(private val repository: MentorSearchRepositoryImpl) : ViewModel() {
 
     private val _progressBarValue = MutableLiveData<Int>(1)
     val progressBarValue: LiveData<Int> get() = _progressBarValue

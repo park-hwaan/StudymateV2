@@ -9,13 +9,14 @@ import com.example.studymatetwo.dto.BoardDto
 import com.example.studymatetwo.dto.CommentContentDto
 import com.example.studymatetwo.dto.CommentDto
 import com.example.studymatetwo.repository.BoardRepository
+import com.example.studymatetwo.repositoryImpl.BoardRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class BoardViewModel @Inject constructor(private val repository: BoardRepository) : ViewModel() {
+class BoardViewModel @Inject constructor(private val repository: BoardRepositoryImpl) : ViewModel() {
     private var _mutableBoardList = MutableLiveData<List<BoardDto>>(emptyList())
     val boardList: LiveData<List<BoardDto>> get() = _mutableBoardList
 
