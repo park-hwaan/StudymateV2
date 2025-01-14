@@ -1,6 +1,7 @@
 package com.example.studymatetwo.api
 
 import com.example.studymatetwo.dto.*
+import com.example.studymatetwo.error.MainResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -58,30 +59,30 @@ interface ApiService {
     @GET("api/posts")
     suspend fun getBoardList(
         @Header("Authorization") authorization: String
-    ) : List<BoardDto>
+    ) : Result<List<BoardDto>>
 
     @GET("api/posts/{post_id}")
     suspend fun getBoardContent(
         @Header("Authorization") authorization: String,
         @Path("post_id") postId : String
-    ) : BoardDto
+    ) : Result<BoardDto>
 
     @POST("api/posts/{post_id}/comments")
     suspend fun postBoardComment(
         @Header("Authorization") authorization: String,
         @Path("post_id") postId : String,
         @Body commentContentDto : CommentContentDto
-    ) : String
+    ) : Result<String>
 
     @GET("api/posts/{post_id}/comments")
     suspend fun getCommentList(
         @Header("Authorization") authorization: String,
         @Path("post_id") postId : String
-    ) : List<CommentDto>
+    ) : Result<List<CommentDto>>
 
     @GET("api/posts/search")
     suspend fun getBoardSearch(
         @Header("Authorization") authorization: String,
         @Query("keyword") keyword: String
-    ) : List<BoardDto>
+    ) : Result<List<BoardDto>>
 }

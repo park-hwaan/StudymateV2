@@ -70,15 +70,15 @@ class BoardInsideActivity : AppCompatActivity() {
 
     private fun observeBoardContent(){
         viewModel.boardContent.observe(this, Observer {
-            val korCategory = boardCategory(it.data!!.category)
+            val korCategory = boardCategory(it.category)
 
-            binding.nicknameText.text = it.data.nickname
-            binding.dateText.text = it.data.createdAt
-            binding.titleText.text = it.data.title
-            binding.contentText.text = it.data.content
+            binding.nicknameText.text = it.nickname
+            binding.dateText.text = it.createdAt
+            binding.titleText.text = it.title
+            binding.contentText.text = it.content
             binding.categoryText.text = korCategory
-            binding.heartAmountText.text = it.data.likeCount.toString()
-            binding.commentAmountText.text = it.data.commentCount.toString()
+            binding.heartAmountText.text = it.likeCount.toString()
+            binding.commentAmountText.text = it.commentCount.toString()
         })
     }
 
