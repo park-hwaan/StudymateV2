@@ -8,6 +8,8 @@ import com.example.studymatetwo.api.ApiResponse
 import com.example.studymatetwo.dto.BoardDto
 import com.example.studymatetwo.dto.CommentContentDto
 import com.example.studymatetwo.dto.CommentDto
+import com.example.studymatetwo.error.AppError
+import com.example.studymatetwo.error.HttpError
 import com.example.studymatetwo.error.MainResponse
 import com.example.studymatetwo.repository.BoardRepository
 import com.example.studymatetwo.repositoryImpl.BoardRepositoryImpl
@@ -33,6 +35,9 @@ class BoardViewModel @Inject constructor(private val repository: BoardRepository
     private var _mutableCommentList = MutableLiveData<List<CommentDto>>()
     val commentList: LiveData<List<CommentDto>> get() = _mutableCommentList
 
+    private var _mutableErrorState = MutableLiveData<String>()
+    val errorState : LiveData<String> get() = _mutableErrorState
+
 
     fun getBoardList(userToken: String) = viewModelScope.launch(Dispatchers.IO) {
         repository.getBoardList(userToken)
@@ -40,7 +45,7 @@ class BoardViewModel @Inject constructor(private val repository: BoardRepository
                 _mutableBoardList.postValue(it)
             }
             .onFailure {
-
+                _mutableErrorState.value = it.handleError()
             }
     }
 
@@ -50,7 +55,7 @@ class BoardViewModel @Inject constructor(private val repository: BoardRepository
                 _mutableBoardContent.postValue(it)
             }
             .onFailure {
-
+                _mutableErrorState.value = it.handleError()
             }
     }
 
@@ -60,7 +65,7 @@ class BoardViewModel @Inject constructor(private val repository: BoardRepository
                 _mutableBoardComment.postValue(it)
             }
             .onFailure {
-
+                _mutableErrorState.value = it.handleError()
             }
     }
 
@@ -70,7 +75,7 @@ class BoardViewModel @Inject constructor(private val repository: BoardRepository
                 _mutableCommentList.postValue(it)
             }
             .onFailure {
-
+                _mutableErrorState.value = it.handleError()
             }
     }
 
@@ -80,8 +85,21 @@ class BoardViewModel @Inject constructor(private val repository: BoardRepository
                 _mutableBoardSearchList.postValue(it)
             }
             .onFailure {
-
+                _mutableErrorState.value = it.handleError()
             }
+    }
+
+    private fun Throwable.handleError(): String {
+        return when(this) {
+            is AppError.UnexpectedError -> "예상치 못한 에러입니다.."
+            is AppError.NetworkError -> "네트워크 에러가 떴어요.."
+            is HttpError.BadRequestError -> "bad request"
+            is HttpError.UnauthorizedError -> "unauthorized"
+            is HttpError.ForbiddenError -> "Forbidden"
+            is HttpError.NotFoundError -> "Not Found"
+            is HttpError.InternalServerError -> "Internal Server Error"
+            else -> ""
+        }
     }
 
 }

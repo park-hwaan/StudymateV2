@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -46,7 +47,6 @@ class BoardFragment : Fragment() {
                 intent.putExtra("boardId",boardId)
                 startActivity(intent)
             }
-
         })
 
         viewModel.getBoardList("Bearer $userToken")
@@ -60,20 +60,19 @@ class BoardFragment : Fragment() {
                     2 -> observerBoardList("STUDY")
                 }
             }
-
             override fun onTabUnselected(tab: TabLayout.Tab?) {
                observerBoardList("FREE")
             }
-
             override fun onTabReselected(tab: TabLayout.Tab?) {
             }
-
         })
 
         observerBoardSearchList()
         initSearchView()
 
         onRefresh()
+
+        observerErrorState()
 
         return binding.root
     }
@@ -116,6 +115,12 @@ class BoardFragment : Fragment() {
     private fun observerBoardSearchList(){
         viewModel.boardSearchList.observe(viewLifecycleOwner, Observer { response ->
             boardListAdapter.setList(response)
+        })
+    }
+
+    private fun observerErrorState(){
+        viewModel.errorState.observe(viewLifecycleOwner, Observer {
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         })
     }
 
