@@ -25,7 +25,7 @@ object IntroDialogUtil {
     }
 
     fun showIntroDialog(context: Context) {
-//        if (!Prefs.shouldShowDialog(context)) return
+        if (!Prefs.shouldShowDialog(context)) return
 
         val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_intro, null)
         val dialog = AlertDialog.Builder(context)

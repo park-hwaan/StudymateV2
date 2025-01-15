@@ -56,22 +56,7 @@ class MentorListFragment : Fragment() {
             }
         })
 
-        observerChatRoom()
-
         return binding.root
     }
 
-    private fun observerChatRoom(){
-        viewModel.postChatRoomResult.observe(viewLifecycleOwner, Observer { response ->
-            when (response) {
-                is ApiResponse.Loading -> { }
-                is ApiResponse.Success -> {
-                    Toast.makeText(requireContext(), "채팅방이 생성되었습니다!", Toast.LENGTH_SHORT).show()
-                }
-                is ApiResponse.Error -> {
-                    Toast.makeText(requireContext(), "오류가 발생했습니다!", Toast.LENGTH_SHORT).show()
-                }
-            }
-        })
-    }
 }

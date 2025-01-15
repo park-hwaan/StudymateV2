@@ -90,16 +90,16 @@ class BoardViewModel @Inject constructor(private val repository: BoardRepository
     }
 
     private fun Throwable.handleError(): String {
-        return when(this) {
-            is AppError.UnexpectedError -> "예상치 못한 에러입니다.."
-            is AppError.NetworkError -> "네트워크 에러가 떴어요.."
-            is HttpError.BadRequestError -> "bad request"
-            is HttpError.UnauthorizedError -> "unauthorized"
-            is HttpError.ForbiddenError -> "Forbidden"
-            is HttpError.NotFoundError -> "Not Found"
-            is HttpError.InternalServerError -> "Internal Server Error"
-            else -> ""
-        }
+        val errorMessages = mapOf(
+            AppError.UnexpectedError::class to "예상치 못한 에러입니다..",
+            AppError.NetworkError::class to "네트워크 에러가 떴어요..",
+            HttpError.BadRequestError::class to "bad request",
+            HttpError.UnauthorizedError::class to "unauthorized",
+            HttpError.ForbiddenError::class to "Forbidden",
+            HttpError.NotFoundError::class to "Not Found",
+            HttpError.InternalServerError::class to "Internal Server Error"
+        )
+        return errorMessages[this::class] ?: "알 수 없는 에러"
     }
 
 }

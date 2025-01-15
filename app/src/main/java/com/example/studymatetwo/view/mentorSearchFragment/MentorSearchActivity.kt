@@ -77,6 +77,7 @@ class MentorSearchActivity : AppCompatActivity() {
 
         observeNextBtn()
         observeProgressBar()
+        observerErrorState()
     }
 
     private val callback = object : OnBackPressedCallback(true) {
@@ -130,32 +131,31 @@ class MentorSearchActivity : AppCompatActivity() {
         val userToken = sharedPreferences.getString("userToken", "").toString()
 
         viewModel.postMenteeQuestionResult.observe(this, Observer { response ->
-            when (response) {
-                is ApiResponse.Loading -> { }
-                is ApiResponse.Success -> {
-                    val questionId = response.data!!.id
-                    viewModel.getMentorList("Bearer $userToken", questionId)
-                }
-                is ApiResponse.Error -> {
-                    Toast.makeText(this, "입력 내용을 확인해주세요!", Toast.LENGTH_SHORT).show()
+            val questionId = response.id
+            viewModel.getMentorList("Bearer $userToken", questionId)
+        })
+    }
+
+    private fun observerMentor() {
+        viewModel.mentorList.observe(this, Observer { mentorListDto ->
+            mentorListDto?.memberList?.let { mentorList ->
+                val existingFragment = supportFragmentManager.findFragmentByTag(MentorListFragment::class.java.simpleName)
+                if (existingFragment == null) {
+                    val mentorListFragment = MentorListFragment().apply {
+                        arguments = Bundle().apply {
+                            putParcelableArrayList("mentorList", ArrayList(mentorList))
+                        }
+                    }
+                    changeFragment(mentorListFragment)
                 }
             }
         })
     }
 
-    private fun observerMentor(){
-        viewModel.mentorList.observe(this, Observer {
-            it?.let{
-                val existingFragment = supportFragmentManager.findFragmentByTag(MentorListFragment::class.java.simpleName)
-               if(existingFragment == null){
-                   val mentorListFragment = MentorListFragment().apply {
-                       arguments = Bundle().apply {
-                           putParcelableArrayList("mentorList", ArrayList(it))
-                       }
-                   }
-                   changeFragment(mentorListFragment)
-               }
-            }
+
+    private fun observerErrorState(){
+        viewModel.errorState.observe(this, Observer {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })
     }
 

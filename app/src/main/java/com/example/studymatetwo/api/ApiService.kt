@@ -30,14 +30,14 @@ interface ApiService {
     suspend fun postQuestion(
         @Header("Authorization") authorization: String,
         @Body quesInfo: MenteeQuestionDto
-    ): MenteeQuestionResponseDto
+    ): Result<MenteeQuestionResponseDto>
 
     //질문에 대한 멘토리스트 불러오기
     @GET("api/matching/{questionId}")
     suspend fun getMentorList(
         @Header("Authorization") authorization: String,
         @Path("questionId") questionId : String
-    ): MentorListDto
+    ): Result<MentorListDto>
 
     //자기 계정정보 불러오가
     @GET("api/user")
@@ -49,7 +49,7 @@ interface ApiService {
     suspend fun postChatroom(
         @Header("Authorization") authorization: String,
         @Query("name") name: String
-    ) : String
+    ) : Result<String>
 
     @GET("api/chat/rooms")
     suspend fun getChatRoomList(
