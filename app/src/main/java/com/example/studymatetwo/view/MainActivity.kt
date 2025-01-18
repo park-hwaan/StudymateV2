@@ -1,6 +1,8 @@
 package com.example.studymatetwo.view
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -18,7 +20,8 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private val signViewModel: SignViewModel by viewModels()
+    private val viewModel: SignViewModel by viewModels()
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,33 +36,29 @@ class MainActivity : AppCompatActivity() {
 
         binding.loginBtn.setOnClickListener {
             val signInDto = SignInDto(binding.editEmail.text.toString(), binding.editPassword.text.toString())
-            signViewModel.postSignIn(signInDto)
+            viewModel.postSignIn(signInDto)
         }
 
         signInObserve()
     }
 
     private fun signInObserve(){
-        signViewModel.signInResult.observe(this, Observer { response ->
-            when (response) {
-                is ApiResponse.Success -> {
-                    Toast.makeText(this, "로그인 성공!", Toast.LENGTH_SHORT).show()
+        sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        viewModel.signInResult.observe(this, Observer {
+            Toast.makeText(this, "로그인 성공!", Toast.LENGTH_SHORT).show()
 
-                    lifecycleScope.launch {
-                        kotlinx.coroutines.delay(1000)
-                        val intent = Intent(this@MainActivity, MentorSearchActivity::class.java)
-                        startActivity(intent)
+            val editor = sharedPreferences.edit()
+            editor.putString("userToken", it.accessToken)
+            editor.putString("refreshToken", it.refreshToken)
+            editor.apply()
 
-                        binding.editEmail.text = null
-                        binding.editPassword.text = null
-                    }
-                }
-                is ApiResponse.Error -> {
-                    Toast.makeText(this, "로그인 실패: 비밀번호와 아이디를 확인해주세요", Toast.LENGTH_SHORT).show()
-                }
-                is ApiResponse.Loading -> {
-                    Toast.makeText(this, "로그인 중...", Toast.LENGTH_SHORT).show()
-                }
+            lifecycleScope.launch {
+                kotlinx.coroutines.delay(1000)
+                val intent = Intent(this@MainActivity, MentorSearchActivity::class.java)
+                startActivity(intent)
+
+                binding.editEmail.text = null
+                binding.editPassword.text = null
             }
         })
     }

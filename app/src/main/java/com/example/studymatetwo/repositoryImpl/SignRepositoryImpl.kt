@@ -23,51 +23,14 @@ class SignRepositoryImpl @Inject constructor(private val apiService: ApiService,
     private val sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
 
     @Singleton
-    override suspend fun getMyAccountInfo(userToken: String) : ApiResponse<MyInfoDto>{
-        return try {
-            val response = apiService.getUserInfo(userToken)
-            ApiResponse.Success(response)
-        }catch (e: HttpException) {
-            ApiResponse.Error(e.message ?: "HTTP 오류 발생")
-        } catch (e: IOException) {
-            ApiResponse.Error(e.message ?: "네트워크 오류 발생")
-        } catch (e: IllegalStateException) {
-            ApiResponse.Error(e.message ?: "알 수 없는 오류 발생")
-        }
-    }
+    override suspend fun getMyAccountInfo(userToken: String) : Result<MyInfoDto> = apiService.getUserInfo(userToken)
 
     @Singleton
     //로그인 서비스
-    override suspend fun postSignIn(signInDto: SignInDto): ApiResponse<SignInResponseDto> {
-        return try {
-            val response = apiService.postSignIn(signInDto)
-            val editor = sharedPreferences.edit()
-            editor.putString("userToken", response.accessToken)
-            editor.putString("refreshToken", response.refreshToken)
-            editor.apply()
-            ApiResponse.Success(response)
-        } catch (e: HttpException) {
-            ApiResponse.Error(e.message ?: "HTTP 오류 발생")
-        } catch (e: IOException) {
-            ApiResponse.Error(e.message ?: "네트워크 오류 발생")
-        } catch (e: Exception) {
-            ApiResponse.Error(e.message ?: "알 수 없는 오류 발생")
-        }
-    }
+    override suspend fun postSignIn(signInDto: SignInDto): Result<SignInResponseDto> = apiService.postSignIn(signInDto)
 
     @Singleton
     //회원가입 서비스
-    override suspend fun postSignUp(signUpDto: SignUpDto) : ApiResponse<String>{
-        return try{
-            val response = apiService.postSignUp(signUpDto)
-            ApiResponse.Success(response)
-        }catch (e: HttpException) {
-            ApiResponse.Error(e.message ?: "HTTP 오류 발생")
-        } catch (e: IOException) {
-            ApiResponse.Error(e.message ?: "네트워크 오류 발생")
-        } catch (e: IllegalStateException) {
-            ApiResponse.Error(e.message ?: "알 수 없는 오류 발생")
-        }
-    }
+    override suspend fun postSignUp(signUpDto: SignUpDto): Result<String> = apiService.postSignUp(signUpDto)
 
 }

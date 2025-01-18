@@ -34,12 +34,12 @@ class MyPageFragment : Fragment() {
     }
     private fun getMyInfo(){
         viewModel.myInfoData.observe(viewLifecycleOwner, Observer {
-            binding.reviewCount.text = it.data!!.reviewCount.toString()
-            binding.matchingCount.text = it.data.matchingCount.toString()
-            binding.nameText.text = it.data.name
+            binding.reviewCount.text = it.reviewCount.toString()
+            binding.matchingCount.text = it.matchingCount.toString()
+            binding.nameText.text = it.name
 
             val editor = sharedPreferences.edit()
-            editor.putString("name", it.data.name)
+            editor.putString("name", it.name)
             editor.apply()
 
         })

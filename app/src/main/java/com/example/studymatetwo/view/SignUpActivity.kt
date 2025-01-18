@@ -129,20 +129,7 @@ class SignUpActivity : AppCompatActivity() {
 
     //회원가입 observe
     private fun signUpObserve(){
-        viewModel.signUpResult.observe(this) { response ->
-            when (response) {
-                is ApiResponse.Loading -> {
-                    Toast.makeText(this, "회원가입 중...", Toast.LENGTH_SHORT).show()
-                }
-                is ApiResponse.Success -> {
-                    Toast.makeText(this, "회원가입 성공!!", Toast.LENGTH_SHORT).show()
-                    finishAffinity()
-                    startActivity(Intent(this, MainActivity::class.java))
-                }
-                is ApiResponse.Error -> {
-                    Toast.makeText(this, "회원가입 실패!!", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
+        finishAffinity()
+        startActivity(Intent(this, MainActivity::class.java))
     }
 }

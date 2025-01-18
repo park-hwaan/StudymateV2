@@ -17,13 +17,13 @@ interface ApiService {
     @POST("api/login")
     suspend fun postSignIn(
         @Body signInDto: SignInDto
-    ) : SignInResponseDto
+    ) : Result<SignInResponseDto>
 
     //회원가입
     @POST("api/signIn")
     suspend fun postSignUp(
         @Body signUpDto : SignUpDto
-    ) : String
+    ) : Result<String>
 
     //멘토에게 할 질문 post
     @POST("api/question")
@@ -43,7 +43,7 @@ interface ApiService {
     @GET("api/user")
     suspend fun getUserInfo(
         @Header("Authorization") authorization: String
-    ): MyInfoDto
+    ): Result<MyInfoDto>
 
     @POST("api/chat/room")
     suspend fun postChatroom(

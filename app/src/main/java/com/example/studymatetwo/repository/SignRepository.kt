@@ -7,10 +7,10 @@ import com.example.studymatetwo.dto.SignInResponseDto
 import com.example.studymatetwo.dto.SignUpDto
 
 interface SignRepository {
-    suspend fun getMyAccountInfo(userToken: String) : ApiResponse<MyInfoDto>
+    suspend fun getMyAccountInfo(userToken: String) : Result<MyInfoDto>
 
-    suspend fun postSignIn(signInDto: SignInDto): ApiResponse<SignInResponseDto>
+    suspend fun postSignIn(signInDto: SignInDto): Result<SignInResponseDto>
 
-    suspend fun postSignUp(signUpDto: SignUpDto) : ApiResponse<String>
+    suspend fun postSignUp(signUpDto: SignUpDto) : Result<String>
 
 }

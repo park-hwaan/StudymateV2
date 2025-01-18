@@ -45,7 +45,7 @@ class BoardViewModel @Inject constructor(private val repository: BoardRepository
                 _mutableBoardList.postValue(it)
             }
             .onFailure {
-                _mutableErrorState.value = it.handleError()
+                _mutableErrorState.postValue(it.handleError())
             }
     }
 
@@ -55,7 +55,7 @@ class BoardViewModel @Inject constructor(private val repository: BoardRepository
                 _mutableBoardContent.postValue(it)
             }
             .onFailure {
-                _mutableErrorState.value = it.handleError()
+                _mutableErrorState.postValue(it.handleError())
             }
     }
 
@@ -65,7 +65,7 @@ class BoardViewModel @Inject constructor(private val repository: BoardRepository
                 _mutableBoardComment.postValue(it)
             }
             .onFailure {
-                _mutableErrorState.value = it.handleError()
+                _mutableErrorState.postValue(it.handleError())
             }
     }
 
@@ -75,7 +75,7 @@ class BoardViewModel @Inject constructor(private val repository: BoardRepository
                 _mutableCommentList.postValue(it)
             }
             .onFailure {
-                _mutableErrorState.value = it.handleError()
+                _mutableErrorState.postValue(it.handleError())
             }
     }
 
@@ -85,7 +85,7 @@ class BoardViewModel @Inject constructor(private val repository: BoardRepository
                 _mutableBoardSearchList.postValue(it)
             }
             .onFailure {
-                _mutableErrorState.value = it.handleError()
+                _mutableErrorState.postValue(it.handleError())
             }
     }
 
