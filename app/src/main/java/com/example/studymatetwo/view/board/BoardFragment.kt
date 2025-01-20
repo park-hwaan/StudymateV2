@@ -26,6 +26,7 @@ class BoardFragment : Fragment() {
     private lateinit var userToken : String
     private lateinit var boardListAdapter: BoardListAdapter
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var searchHandler: SearchHandler
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,7 +35,6 @@ class BoardFragment : Fragment() {
 
         sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         userToken = sharedPreferences.getString("userToken", "") ?: ""
-
 
         boardListAdapter = BoardListAdapter()
         binding.recycle.layoutManager = LinearLayoutManager(requireContext())
@@ -67,8 +67,10 @@ class BoardFragment : Fragment() {
             }
         })
 
+        searchHandler = SearchHandler(viewModel, userToken, boardListAdapter)
+        searchHandler.initSearchView(binding.searchView)
+
         observerBoardSearchList()
-        initSearchView()
 
         onRefresh()
 
@@ -95,21 +97,6 @@ class BoardFragment : Fragment() {
             observerBoardList(category)
             binding.swipeRefreshLayout.isRefreshing = false
         }
-    }
-
-    private fun initSearchView() {
-        binding.searchView.isSubmitButtonEnabled = true
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean { //검색을 완료하였을 경우 (키보드에 있는 '검색' 돋보기 버튼을 선택하였을 경우)
-                query?.let { viewModel.getBoardSearch("Bearer $userToken",it) }
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean { //검색어를 변경할 때마다 실행됨
-                newText?.let { viewModel.getBoardSearch("Bearer $userToken",it) }
-                return true
-            }
-        })
     }
 
     private fun observerBoardSearchList(){
