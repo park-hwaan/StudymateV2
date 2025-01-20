@@ -12,7 +12,6 @@ import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.studymatetwo.R
-import com.example.studymatetwo.api.ApiResponse
 import com.example.studymatetwo.databinding.ActivityMentorSearchBinding
 import com.example.studymatetwo.dto.MenteeQuestionDto
 import com.example.studymatetwo.util.IntroDialogUtil

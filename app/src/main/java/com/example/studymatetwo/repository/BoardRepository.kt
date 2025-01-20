@@ -1,10 +1,8 @@
 package com.example.studymatetwo.repository
 
-import com.example.studymatetwo.api.ApiResponse
 import com.example.studymatetwo.dto.BoardDto
 import com.example.studymatetwo.dto.CommentContentDto
 import com.example.studymatetwo.dto.CommentDto
-import com.example.studymatetwo.error.MainResponse
 import javax.inject.Singleton
 
 @Singleton

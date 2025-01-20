@@ -1,7 +1,6 @@
 package com.example.studymatetwo.repositoryImpl
 
 import android.content.Context
-import com.example.studymatetwo.api.ApiResponse
 import com.example.studymatetwo.api.ApiService
 import com.example.studymatetwo.dto.MyInfoDto
 import com.example.studymatetwo.dto.SignInDto
@@ -12,8 +11,6 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import retrofit2.HttpException
-import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton
 

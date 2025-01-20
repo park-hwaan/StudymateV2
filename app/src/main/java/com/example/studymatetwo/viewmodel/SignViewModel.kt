@@ -4,14 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.studymatetwo.api.ApiResponse
 import com.example.studymatetwo.dto.MyInfoDto
 import com.example.studymatetwo.dto.SignInDto
 import com.example.studymatetwo.dto.SignInResponseDto
 import com.example.studymatetwo.dto.SignUpDto
 import com.example.studymatetwo.error.AppError
 import com.example.studymatetwo.error.HttpError
-import com.example.studymatetwo.repository.SignRepository
 import com.example.studymatetwo.repositoryImpl.SignRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

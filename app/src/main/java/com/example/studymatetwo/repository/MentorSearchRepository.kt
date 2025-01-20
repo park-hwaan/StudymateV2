@@ -1,9 +1,7 @@
 package com.example.studymatetwo.repository
 
-import com.example.studymatetwo.api.ApiResponse
 import com.example.studymatetwo.dto.MenteeQuestionDto
 import com.example.studymatetwo.dto.MenteeQuestionResponseDto
-import com.example.studymatetwo.dto.MentorDto
 import com.example.studymatetwo.dto.MentorListDto
 import javax.inject.Singleton
 

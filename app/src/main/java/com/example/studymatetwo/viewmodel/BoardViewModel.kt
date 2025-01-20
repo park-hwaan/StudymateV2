@@ -4,14 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.studymatetwo.api.ApiResponse
 import com.example.studymatetwo.dto.BoardDto
 import com.example.studymatetwo.dto.CommentContentDto
 import com.example.studymatetwo.dto.CommentDto
 import com.example.studymatetwo.error.AppError
 import com.example.studymatetwo.error.HttpError
-import com.example.studymatetwo.error.MainResponse
-import com.example.studymatetwo.repository.BoardRepository
 import com.example.studymatetwo.repositoryImpl.BoardRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

@@ -1,17 +1,10 @@
 package com.example.studymatetwo.repositoryImpl
 
-import com.example.studymatetwo.api.ApiResponse
 import com.example.studymatetwo.api.ApiService
 import com.example.studymatetwo.dto.BoardDto
 import com.example.studymatetwo.dto.CommentContentDto
 import com.example.studymatetwo.dto.CommentDto
-import com.example.studymatetwo.error.MainResponse
 import com.example.studymatetwo.repository.BoardRepository
-import dagger.Module
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import retrofit2.HttpException
-import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton
 

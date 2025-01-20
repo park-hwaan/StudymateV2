@@ -1,6 +1,5 @@
 package com.example.studymatetwo.repository
 
-import com.example.studymatetwo.api.ApiResponse
 import com.example.studymatetwo.dto.MyInfoDto
 import com.example.studymatetwo.dto.SignInDto
 import com.example.studymatetwo.dto.SignInResponseDto

@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import com.example.studymatetwo.api.ApiResponse
 import com.example.studymatetwo.databinding.ActivityMainBinding
 import com.example.studymatetwo.dto.SignInDto
 import com.example.studymatetwo.view.mentorSearchFragment.MentorSearchActivity
@@ -40,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         signInObserve()
+        observerErrorState()
     }
 
     private fun signInObserve(){
@@ -60,6 +60,12 @@ class MainActivity : AppCompatActivity() {
                 binding.editEmail.text = null
                 binding.editPassword.text = null
             }
+        })
+    }
+
+    private fun observerErrorState(){
+        viewModel.errorState.observe(this, Observer {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })
     }
 }

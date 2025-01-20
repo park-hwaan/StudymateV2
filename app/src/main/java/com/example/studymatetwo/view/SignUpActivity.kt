@@ -3,13 +3,12 @@ package com.example.studymatetwo.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.example.studymatetwo.R
-import com.example.studymatetwo.api.ApiResponse
 import com.example.studymatetwo.databinding.ActivitySignUpBinding
 import com.example.studymatetwo.dto.SignUpDto
 import com.example.studymatetwo.view.signUpFragment.*
@@ -62,12 +61,7 @@ class SignUpActivity : AppCompatActivity() {
         binding.progressBar.max = fragmentList.size
         binding.progressBar.progress = 1
 
-        // 시작 프래그먼트 로드
-        supportFragmentManager
-            .beginTransaction()
-            .add(R.id.frameLayout, EmailFragment())
-            .addToBackStack(null)
-            .commit()
+       loadFragment(EmailFragment())
 
         // 뒤로가기 이미지 클릭 이벤트
         binding.backImg.setOnClickListener {
@@ -81,11 +75,9 @@ class SignUpActivity : AppCompatActivity() {
         binding.nextBtn.setOnClickListener {
             if (viewModel.cursor.value!! <= fragmentList.size) {
                 if (viewModel.cursor.value == fragmentList.size) {
-                    // 마지막 프래그먼트에서 회원가입 함수 호출
                     viewModel.postSignUp(viewModel.signUpData.value ?: SignUpDto())
                 } else {
-                    // 다음 프래그먼트로 이동
-                    changeFragment(fragmentList[viewModel.cursor.value!!])
+                    loadFragment(fragmentList[viewModel.cursor.value!!])
                     viewModel.nextCursor()
                     increaseProgress()
                 }
@@ -94,9 +86,10 @@ class SignUpActivity : AppCompatActivity() {
 
         //회원가입 observe
         signUpObserve()
+        observerErrorState()
     }
 
-    private fun changeFragment(fragment: Fragment) {
+    private fun loadFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.frameLayout, fragment)
             .addToBackStack(null)
@@ -129,7 +122,16 @@ class SignUpActivity : AppCompatActivity() {
 
     //회원가입 observe
     private fun signUpObserve(){
-        finishAffinity()
-        startActivity(Intent(this, MainActivity::class.java))
+        viewModel.signUpResult.observe(this, Observer {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            finishAffinity()
+            startActivity(Intent(this, MainActivity::class.java))
+        })
+    }
+
+    private fun observerErrorState(){
+        viewModel.errorState.observe(this, Observer {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        })
     }
 }
