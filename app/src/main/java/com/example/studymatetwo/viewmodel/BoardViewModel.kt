@@ -10,6 +10,8 @@ import com.example.studymatetwo.dto.CommentDto
 import com.example.studymatetwo.error.AppError
 import com.example.studymatetwo.error.HttpError
 import com.example.studymatetwo.repositoryImpl.BoardRepositoryImpl
+import com.example.studymatetwo.room.dao.BoardDao
+import com.example.studymatetwo.room.entity.BoardEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -35,6 +37,7 @@ class BoardViewModel @Inject constructor(private val repository: BoardRepository
     private var _mutableErrorState = MutableLiveData<String>()
     val errorState : LiveData<String> get() = _mutableErrorState
 
+    val localBoardList: LiveData<List<BoardEntity>> = repository.getLocalBoardList()
 
     fun getBoardList(userToken: String) = viewModelScope.launch(Dispatchers.IO) {
         repository.getBoardList(userToken)

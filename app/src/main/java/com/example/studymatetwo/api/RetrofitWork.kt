@@ -17,8 +17,9 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object RetrofitWork {
     private const val BASE_URL = "http://10.0.2.2:8080/"
-    var gson= GsonBuilder().setLenient().create()
+    private var gson= GsonBuilder().setLenient().create()
 
+    @Singleton
     private val okHttpClient: OkHttpClient by lazy {
         OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().apply {
@@ -27,6 +28,7 @@ object RetrofitWork {
             .build()
     }
 
+    @Singleton
     private val retrofit: Retrofit by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)

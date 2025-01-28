@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,7 @@ import com.example.studymatetwo.dto.BoardDto
 import com.example.studymatetwo.viewmodel.BoardViewModel
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class BoardFragment : Fragment() {
@@ -39,6 +41,11 @@ class BoardFragment : Fragment() {
         boardListAdapter = BoardListAdapter()
         binding.recycle.layoutManager = LinearLayoutManager(requireContext())
         binding.recycle.adapter = boardListAdapter
+
+        binding.writeButton.setOnClickListener {
+            val intent = Intent(requireContext(), BoardWriteActivity::class.java)
+            startActivity(intent)
+        }
 
         boardListAdapter.setOnItemClickListener(object : BoardListAdapter.OnItemClickListener{
             override fun onItemClick(item: BoardDto) {
@@ -71,23 +78,21 @@ class BoardFragment : Fragment() {
         searchHandler.initSearchView(binding.searchView)
 
         observerBoardSearchList()
-
         onRefresh()
-
         observerErrorState()
+        localBoardData()
 
         return binding.root
     }
     private fun observerBoardList(category: String){
-        viewModel.boardList.observe(viewLifecycleOwner, Observer { response ->
-            val filterBoardList =response?.filter { it.category == category } ?: emptyList()
+        viewModel.boardList.observe(viewLifecycleOwner, Observer { boardList ->
+            val filterBoardList =boardList?.filter { it.category == category } ?: emptyList()
             boardListAdapter.setList(filterBoardList)
         })
     }
 
     private fun onRefresh(){
         binding.swipeRefreshLayout.setOnRefreshListener {
-
             val category = when(binding.tabLayout.selectedTabPosition){
                 0 -> "FREE"
                 1 -> "QUESTION"
@@ -108,6 +113,12 @@ class BoardFragment : Fragment() {
     private fun observerErrorState(){
         viewModel.errorState.observe(viewLifecycleOwner, Observer {
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+        })
+    }
+
+    private fun localBoardData(){
+        viewModel.localBoardList.observe(viewLifecycleOwner, Observer {
+            Log.d("BoardFragment",it.toString())
         })
     }
 
