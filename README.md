@@ -2,8 +2,8 @@
 ## Demo
 | 분야| 사용기술  |
 |:----:|:------:|
-| **메인 화면**| ![로그인화면](https://github.com/user-attachments/assets/92b9ea4a-f2ce-41e5-ac50-8870fe768d47) |
+| **메인 화면**| ![Image](https://github.com/user-attachments/assets/ac8aec4a-dc28-4c8d-91ff-498b7d727b92) |
 | **게시판 화면**  |  <img src="https://github.com/user-attachments/assets/1735469c-2261-4e3d-a0ef-7c18774789a0" alt="alt text" width="50%"> |
-| **온라인 매칭 화면**  |   <img src="https://github.com/user-attachments/assets/ce07ceba-5ab9-4189-ab87-3c396e00c17b" alt="alt text" width="50%">|
-| **채팅 화면**  |  <img src="https://github.com/user-attachments/assets/3243c21f-1f72-44fe-a6e3-329fb97e1244" alt="alt text" width="50%"> |
-| **마이 페이지** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |  <img src="https://github.com/user-attachments/assets/a18778fd-568e-44ff-b0e3-5a83bc318143" alt="alt text" width="50%">|
+| **온라인 매칭 화면**  |  ![Image](https://github.com/user-attachments/assets/40088a26-ed86-4f32-84ae-6b04d5525dc9) ![Image](https://github.com/user-attachments/assets/035c9180-d390-428b-9067-55ef43407d39)|
+| **채팅 화면**  | ![Image](https://github.com/user-attachments/assets/aa7934d4-55ff-4960-92df-5a6347316ec2) |
+| **마이 페이지**| ![Image](https://github.com/user-attachments/assets/ae61879d-adff-4e6d-a9e0-e9b41c98c468) |
