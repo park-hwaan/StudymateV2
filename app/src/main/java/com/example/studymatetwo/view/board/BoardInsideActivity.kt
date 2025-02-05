@@ -47,7 +47,7 @@ class BoardInsideActivity : AppCompatActivity() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = commentListAdapter
 
-        boardId = intent.getStringExtra("boardId").toString()
+        boardId = intent.getIntExtra("boardId", 0).toString()
         Log.d("BoardInsideActivity", boardId)
 
         binding.sendBtn.setOnClickListener {

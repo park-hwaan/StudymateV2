@@ -49,6 +49,7 @@ class BoardFragment : Fragment() {
             override fun onItemClick(item: BoardEntity) {
                 val intent = Intent(requireContext(), BoardInsideActivity::class.java)
                 val boardId = item.post_id
+                Log.d("BoardFragment", "Clicked boardId: $boardId")
                 intent.putExtra("boardId",boardId)
                 startActivity(intent)
             }
