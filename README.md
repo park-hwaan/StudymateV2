@@ -16,7 +16,7 @@
 | **비동기 처리**  | `Coroutine`                       |
 | **실시간 통신**  | `EventSource`, `Stomp`            |
 | **데이터 저장**  | `SharedPreferences`               |
-| **이미지 로딩**  | `Glide`                           |
+| **이미지 로딩**  | `Glide`, `Circleimageview`          |
 
 
 ## ERD
