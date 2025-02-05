@@ -7,14 +7,17 @@
 
 
 ## 기술 스택
-- Retrofit, Okhttp3
-- MVVM, LiveData
-- Hilt
-- EventSource  
-- Stomp  
-- Coroutine
-- Sharedpreferences
-- Glide
+
+| 분야             | 사용 기술                        |
+|------------------|-----------------------------------|
+| **네트워크**     | `Retrofit`, `OkHttp3`             |
+| **아키텍처**     | `MVVM`, `LiveData`                |
+| **의존성 주입**  | `Hilt`                          |
+| **비동기 처리**  | `Coroutine`                       |
+| **실시간 통신**  | `EventSource`, `Stomp`            |
+| **데이터 저장**  | `SharedPreferences`               |
+| **이미지 로딩**  | `Glide`                           |
+
 
 ## ERD
 ![erd](https://github.com/user-attachments/assets/42424b81-8793-4490-a6ef-b13c3af95286)
