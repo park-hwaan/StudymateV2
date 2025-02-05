@@ -6,11 +6,14 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.studymatetwo.room.entity.BoardEntity
+import dagger.Provides
+import javax.inject.Singleton
 
 @Dao
 interface BoardDao {
     @Query("SELECT * FROM board_table")
     fun getAllData() : LiveData<List<BoardEntity>>
+
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(dataList : List<BoardEntity>)

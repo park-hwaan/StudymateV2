@@ -4,13 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.studymatetwo.dto.BoardDto
 import com.example.studymatetwo.dto.CommentContentDto
 import com.example.studymatetwo.dto.CommentDto
 import com.example.studymatetwo.error.AppError
 import com.example.studymatetwo.error.HttpError
 import com.example.studymatetwo.repositoryImpl.BoardRepositoryImpl
-import com.example.studymatetwo.room.dao.BoardDao
 import com.example.studymatetwo.room.entity.BoardEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -19,17 +17,17 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BoardViewModel @Inject constructor(private val repository: BoardRepositoryImpl) : ViewModel() {
-    private var _mutableBoardList = MutableLiveData<List<BoardDto>>()
-    val boardList: LiveData<List<BoardDto>> get() = _mutableBoardList
+    private var _mutableBoardList = MutableLiveData<List<com.example.studymatetwo.dto.BoardDto>>()
+    val boardList: LiveData<List<com.example.studymatetwo.dto.BoardDto>> get() = _mutableBoardList
 
-    private var _mutableBoardContent = MutableLiveData<BoardDto>()
-    val boardContent: LiveData<BoardDto> get() = _mutableBoardContent
+    private var _mutableBoardContent = MutableLiveData<com.example.studymatetwo.dto.BoardDto>()
+    val boardContent: LiveData<com.example.studymatetwo.dto.BoardDto> get() = _mutableBoardContent
 
     private var _mutableBoardComment = MutableLiveData<String>()
     val boardComment: LiveData<String> get() = _mutableBoardComment
 
-    private var _mutableBoardSearchList = MutableLiveData<List<BoardDto>>()
-    val boardSearchList: LiveData<List<BoardDto>> get() = _mutableBoardSearchList
+    private var _mutableBoardSearchList = MutableLiveData<List<com.example.studymatetwo.dto.BoardDto>>()
+    val boardSearchList: LiveData<List<com.example.studymatetwo.dto.BoardDto>> get() = _mutableBoardSearchList
 
     private var _mutableCommentList = MutableLiveData<List<CommentDto>>()
     val commentList: LiveData<List<CommentDto>> get() = _mutableCommentList
@@ -41,9 +39,6 @@ class BoardViewModel @Inject constructor(private val repository: BoardRepository
 
     fun getBoardList(userToken: String) = viewModelScope.launch(Dispatchers.IO) {
         repository.getBoardList(userToken)
-            .onSuccess {
-                _mutableBoardList.postValue(it)
-            }
             .onFailure {
                 _mutableErrorState.postValue(it.handleError())
             }

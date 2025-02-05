@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 data class BoardEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name= "post_id")
-    var post_id: String,
+    var post_id: Int,
     @ColumnInfo(name= "title")
     var title: String,
     @ColumnInfo(name= "content")
@@ -22,7 +22,7 @@ data class BoardEntity(
     @ColumnInfo(name= "interests")
     var interests: String,
     @ColumnInfo(name= "recruitmentStatus")
-    var recruitmentStatus : String,
+    var recruitmentStatus : String?,
     @ColumnInfo(name= "likeCount")
     var likeCount : Int,
     @ColumnInfo(name= "commentCount")

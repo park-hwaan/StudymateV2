@@ -10,16 +10,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.studymatetwo.databinding.FragmentBoardBinding
-import com.example.studymatetwo.dto.BoardDto
+import com.example.studymatetwo.room.entity.BoardEntity
 import com.example.studymatetwo.viewmodel.BoardViewModel
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class BoardFragment : Fragment() {
@@ -48,7 +46,7 @@ class BoardFragment : Fragment() {
         }
 
         boardListAdapter.setOnItemClickListener(object : BoardListAdapter.OnItemClickListener{
-            override fun onItemClick(item: BoardDto) {
+            override fun onItemClick(item: BoardEntity) {
                 val intent = Intent(requireContext(), BoardInsideActivity::class.java)
                 val boardId = item.post_id
                 intent.putExtra("boardId",boardId)
@@ -57,18 +55,18 @@ class BoardFragment : Fragment() {
         })
 
         viewModel.getBoardList("Bearer $userToken")
-        observerBoardList("FREE")
+
+        observeLocalBoardList()
 
         binding.tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when(tab!!.position){
-                    0 ->observerBoardList("FREE")
-                    1 -> observerBoardList("QUESTION")
-                    2 -> observerBoardList("STUDY")
+                    0 ->filterBoardList("FREE")
+                    1 -> filterBoardList("QUESTION")
+                    2 -> filterBoardList("STUDY")
                 }
             }
             override fun onTabUnselected(tab: TabLayout.Tab?) {
-               observerBoardList("FREE")
             }
             override fun onTabReselected(tab: TabLayout.Tab?) {
             }
@@ -77,48 +75,53 @@ class BoardFragment : Fragment() {
         searchHandler = SearchHandler(viewModel, userToken, boardListAdapter)
         searchHandler.initSearchView(binding.searchView)
 
-        observerBoardSearchList()
+//        observerBoardSearchList()
         onRefresh()
         observerErrorState()
-        localBoardData()
 
         return binding.root
     }
-    private fun observerBoardList(category: String){
-        viewModel.boardList.observe(viewLifecycleOwner, Observer { boardList ->
-            val filterBoardList =boardList?.filter { it.category == category } ?: emptyList()
-            boardListAdapter.setList(filterBoardList)
-        })
-    }
-
-    private fun onRefresh(){
-        binding.swipeRefreshLayout.setOnRefreshListener {
-            val category = when(binding.tabLayout.selectedTabPosition){
+    private fun observeLocalBoardList() {
+        viewModel.localBoardList.observe(viewLifecycleOwner, Observer { boardList ->
+            val category = when (binding.tabLayout.selectedTabPosition) {
                 0 -> "FREE"
                 1 -> "QUESTION"
                 2 -> "STUDY"
                 else -> "FREE"
             }
-            observerBoardList(category)
+            filterBoardList(category, boardList)
+        })
+    }
+
+    // ✅ 선택한 카테고리에 맞게 데이터 필터링
+    private fun filterBoardList(category: String, boardList: List<BoardEntity>? = viewModel.localBoardList.value) {
+        Log.d("BoardFragment", viewModel.localBoardList.value.toString())
+        val filteredList = boardList?.filter { it.category == category } ?: emptyList()
+        boardListAdapter.setList(filteredList)
+    }
+
+    // ✅ 새로고침 시 Room 데이터 가져오기
+    private fun onRefresh() {
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            filterBoardList(when (binding.tabLayout.selectedTabPosition) {
+                0 -> "FREE"
+                1 -> "QUESTION"
+                2 -> "STUDY"
+                else -> "FREE"
+            })
             binding.swipeRefreshLayout.isRefreshing = false
         }
     }
 
-    private fun observerBoardSearchList(){
-        viewModel.boardSearchList.observe(viewLifecycleOwner, Observer { response ->
-            boardListAdapter.setList(response)
-        })
-    }
+//    private fun observerBoardSearchList(){
+//        viewModel.boardSearchList.observe(viewLifecycleOwner, Observer { response ->
+//            boardListAdapter.setList(response)
+//        })
+//    }
 
     private fun observerErrorState(){
         viewModel.errorState.observe(viewLifecycleOwner, Observer {
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
-        })
-    }
-
-    private fun localBoardData(){
-        viewModel.localBoardList.observe(viewLifecycleOwner, Observer {
-            Log.d("BoardFragment",it.toString())
         })
     }
 

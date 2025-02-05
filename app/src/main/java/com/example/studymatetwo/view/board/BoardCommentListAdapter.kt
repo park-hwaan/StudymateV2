@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.studymatetwo.databinding.CommentItemBinding
-import com.example.studymatetwo.dto.BoardDto
-import com.example.studymatetwo.dto.CommentContentDto
 import com.example.studymatetwo.dto.CommentDto
 
 class BoardCommentListAdapter() : RecyclerView.Adapter<BoardCommentListAdapter.MyView>() {

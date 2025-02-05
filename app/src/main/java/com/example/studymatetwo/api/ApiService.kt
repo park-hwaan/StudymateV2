@@ -1,7 +1,6 @@
 package com.example.studymatetwo.api
 
 import com.example.studymatetwo.dto.*
-import com.example.studymatetwo.error.MainResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header

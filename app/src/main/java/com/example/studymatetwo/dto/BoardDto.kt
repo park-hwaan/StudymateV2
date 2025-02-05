@@ -1,7 +1,7 @@
 package com.example.studymatetwo.dto
 
 data class BoardDto (
-    var post_id: String,
+    var post_id: Int,
     var title: String,
     var content: String,
     var createdAt : String,
