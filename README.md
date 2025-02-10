@@ -52,6 +52,12 @@
       <img src="https://github.com/user-attachments/assets/37042bdb-3037-4541-a5d7-aab35262a626" alt="채팅 2" width="300"/>
     </td>
   </tr>
+   <tr>
+    <td align="center">
+      <strong>알림 화면</strong><br>
+      <img src="https://github.com/user-attachments/assets/9b72151f-e603-4245-b2ff-2fb452c8c8bd" alt="알림 1" width="300"/>
+    </td>
+  </tr>
   <tr>
     <td align="center">
       <strong>마이 페이지</strong><br>
@@ -59,4 +65,3 @@
     </td>
   </tr>
 </table>
-
