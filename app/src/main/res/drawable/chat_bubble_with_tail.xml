@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 말풍선 본체 (둥근 사각형) -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/light_blue" />
+            <corners android:radius="16dp" />
+            <padding
+                android:left="12dp"
+                android:top="8dp"
+                android:right="12dp"
+                android:bottom="8dp" />
+        </shape>
+    </item>
+
+    <!-- 꼬리 (회전된 사각형을 삼각형처럼 보이게) -->
+    <item
+        android:gravity="bottom|left"
+        android:bottom="2dp"
+        android:left="8dp">
+        <rotate
+            android:fromDegrees="45"
+            android:pivotX="0%"
+            android:pivotY="0%">
+            <shape android:shape="rectangle">
+                <solid android:color="@color/light_blue" />
+                <size
+                    android:width="10dp"
+                    android:height="10dp" />
+            </shape>
+        </rotate>
+    </item>
+
+</layer-list>

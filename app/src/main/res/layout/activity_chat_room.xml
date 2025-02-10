@@ -15,23 +15,26 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
+        android:padding="3dp"
         android:orientation="horizontal">
 
         <EditText
             android:id="@+id/editContent"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="6"
             android:background="@drawable/selected_round_button_gray"
             android:padding="10dp"
             android:hint="메시지 입력" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/sendBtn"
-            android:layout_width="wrap_content"
             android:background="@drawable/round_button_background_blue"
-            android:layout_height="35dp"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="2"
             android:textColor="@color/white"
             android:text="전송"
             android:textSize="15sp"
