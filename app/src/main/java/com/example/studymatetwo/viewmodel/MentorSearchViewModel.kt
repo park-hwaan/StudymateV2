@@ -8,6 +8,7 @@ import com.example.studymatetwo.dto.*
 import com.example.studymatetwo.error.AppError
 import com.example.studymatetwo.error.HttpError
 import com.example.studymatetwo.repositoryImpl.MentorSearchRepositoryImpl
+import com.example.studymatetwo.util.handleError
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -103,18 +104,6 @@ class MentorSearchViewModel @Inject constructor(private val repository: MentorSe
 
     fun updateQuestionData(newData: MenteeQuestionDto) {
         _questionData.value = newData
-    }
-
-    private fun Throwable.handleError(): String {
-        val errorMessages = mapOf(
-            AppError.NetworkError::class to "네트워크 에러가 떴어요..",
-            HttpError.BadRequestError::class to "bad request",
-            HttpError.UnauthorizedError::class to "unauthorized",
-            HttpError.ForbiddenError::class to "Forbidden",
-            HttpError.NotFoundError::class to "Not Found",
-            HttpError.InternalServerError::class to "Internal Server Error"
-        )
-        return errorMessages[this::class] ?: "알 수 없는 에러"
     }
 
     private fun MenteeQuestionDto.isValid(): Boolean {
